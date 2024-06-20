@@ -36,7 +36,6 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
                 sequelize_connections.push(sequelize_connection);
             }
             yield connection.end();
-            console.log('[База данных]', 'Подготовка завершена');
             return results;
         }
         else {
@@ -57,6 +56,7 @@ const prepareEND = (...args_2) => __awaiter(void 0, [...args_2], void 0, functio
     for (let sequelize_connection of sequelize_connections) {
         yield sequelize_connection.sync({ logging, alter });
     }
+    console.log('[База данных]', 'Подготовка завершена');
 });
 exports.prepareEND = prepareEND;
 const add_model_names = (action) => mysql_actions.push(action);

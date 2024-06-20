@@ -41,7 +41,6 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 				sequelize_connections.push(sequelize_connection);
 			}			
 			await connection.end();
-			console.log('[База данных]', 'Подготовка завершена');
 			return results;
 		} else {
 			throw new Error('[База данных] DATABASES не установлены');
@@ -60,6 +59,7 @@ export const prepareEND = async (logging = false, alter = false) => {
 	for (let sequelize_connection of sequelize_connections) {
 		await sequelize_connection.sync({ logging, alter });
 	}
+	console.log('[База данных]', 'Подготовка завершена');
 }
 
 export const add_model_names = (action: mysql_action) => mysql_actions.push(action);
