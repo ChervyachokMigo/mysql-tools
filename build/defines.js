@@ -9,11 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.select_mysql_model = exports.add_model_names = exports.prepareDB = void 0;
+exports.select_mysql_model = exports.add_model_names = exports.prepareEND = exports.prepareDB = void 0;
 const promise_1 = require("mysql2/promise");
 const core_1 = require("@sequelize/core");
+const sequelize_connections = [];
 const mysql_actions = [];
-const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_CREDENTIALS_1, ...args_1], void 0, function* (MYSQL_CREDENTIALS, alter = false, logging = false) {
+const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_CREDENTIALS_1, ...args_1], void 0, function* (MYSQL_CREDENTIALS, logging = false) {
     const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
     console.log('[База данных]', 'Подготовка баз данных');
     try {
@@ -31,8 +32,8 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
                     },
                     logging,
                 });
-                yield sequelize_connection.sync({ logging, alter });
                 results.push(sequelize_connection);
+                sequelize_connections.push(sequelize_connection);
             }
             yield connection.end();
             console.log('[База данных]', 'Подготовка завершена');
@@ -52,6 +53,12 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
     }
 });
 exports.prepareDB = prepareDB;
+const prepareEND = (...args_2) => __awaiter(void 0, [...args_2], void 0, function* (logging = false, alter = false) {
+    for (let sequelize_connection of sequelize_connections) {
+        yield sequelize_connection.sync({ logging, alter });
+    }
+});
+exports.prepareEND = prepareEND;
 const add_model_names = (action) => mysql_actions.push(action);
 exports.add_model_names = add_model_names;
 const select_mysql_model = (action) => {

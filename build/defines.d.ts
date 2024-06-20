@@ -10,7 +10,8 @@ type MYSQL_CREDENTIALS = {
     DB_PASSWORD: string;
     DATABASES: string[];
 };
-export declare const prepareDB: (MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, alter?: boolean, logging?: boolean) => Promise<Sequelize[]>;
+export declare const prepareDB: (MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging?: boolean) => Promise<Sequelize[]>;
+export declare const prepareEND: (logging?: boolean, alter?: boolean) => Promise<void>;
 export declare const add_model_names: (action: mysql_action) => number;
 export declare const select_mysql_model: (action: string | null) => ModelStatic;
 export {};

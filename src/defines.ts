@@ -14,9 +14,10 @@ type MYSQL_CREDENTIALS = {
     DATABASES: string[],
 }
 
+const sequelize_connections: Sequelize[] = [];
 const mysql_actions: mysql_action[] = [];
 
-export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, alter = false, logging = false ) => {
+export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging = false ) => {
 
 	const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
 
@@ -36,8 +37,8 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, alter = f
 					},
 					logging,
 				});
-				await sequelize_connection.sync({ logging, alter });
 				results.push(sequelize_connection);
+				sequelize_connections.push(sequelize_connection);
 			}			
 			await connection.end();
 			console.log('[База данных]', 'Подготовка завершена');
@@ -52,6 +53,12 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, alter = f
 		} else {
 			throw new Error(`ошибка базы: ${e}`);
 		}
+	}
+}
+
+export const prepareEND = async (logging = false, alter = false) => {
+	for (let sequelize_connection of sequelize_connections) {
+		await sequelize_connection.sync({ logging, alter });
 	}
 }
 
