@@ -4,10 +4,10 @@ type mysql_action = {
     model: ModelStatic<any>;
 };
 type MYSQL_CREDENTIALS = {
-    DB_USER: string;
-    DB_PASSWORD: string;
     DB_HOST: string;
     DB_PORT: number;
+    DB_USER: string;
+    DB_PASSWORD: string;
     DATABASES: string[];
 };
 export declare const prepareDB: (MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, alter?: boolean, logging?: boolean) => Promise<Sequelize[]>;

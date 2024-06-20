@@ -14,7 +14,7 @@ const promise_1 = require("mysql2/promise");
 const core_1 = require("@sequelize/core");
 const mysql_actions = [];
 const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_CREDENTIALS_1, ...args_1], void 0, function* (MYSQL_CREDENTIALS, alter = false, logging = false) {
-    const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DATABASES } = MYSQL_CREDENTIALS;
+    const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
     console.log('[База данных]', 'Подготовка баз данных');
     try {
         const connection = yield (0, promise_1.createConnection)(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`);

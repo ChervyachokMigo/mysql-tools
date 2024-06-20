@@ -7,10 +7,10 @@ type mysql_action = {
 }
 
 type MYSQL_CREDENTIALS = {
-	DB_USER: string,
-    DB_PASSWORD: string,
     DB_HOST: string,
     DB_PORT: number,
+	DB_USER: string,
+    DB_PASSWORD: string,
     DATABASES: string[],
 }
 
@@ -18,7 +18,7 @@ const mysql_actions: mysql_action[] = [];
 
 export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, alter = false, logging = false ) => {
 
-	const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DATABASES } = MYSQL_CREDENTIALS;
+	const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
 
 	console.log('[База данных]', 'Подготовка баз данных');
 	try {
