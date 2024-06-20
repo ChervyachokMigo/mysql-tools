@@ -113,7 +113,6 @@ export const prepareEND = async (logging = false, alter = false) => {
 		a[i].non_keys = (a[i].fileds as string[]).filter( v =>!(a[i].keys as string[]).includes( v ) );
 	}));
 	console.log('[База данных]', 'Подготовка завершена');
-	console.log('mysql_actions', mysql_actions);
 }
 
 export const add_model_names = (action: mysql_action) => mysql_actions.push(action);

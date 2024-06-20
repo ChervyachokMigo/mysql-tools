@@ -95,7 +95,6 @@ const prepareEND = (...args_2) => __awaiter(void 0, [...args_2], void 0, functio
         a[i].non_keys = a[i].fileds.filter(v => !a[i].keys.includes(v));
     })));
     console.log('[База данных]', 'Подготовка завершена');
-    console.log('mysql_actions', mysql_actions);
 });
 exports.prepareEND = prepareEND;
 const add_model_names = (action) => mysql_actions.push(action);
