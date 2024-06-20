@@ -4,6 +4,10 @@ import { Sequelize, ModelStatic } from '@sequelize/core';
 type mysql_action = {
 	names: string | string[],
     model: ModelStatic<any>,
+	attributes?: {name: string, attribute: any}[],
+	fileds?: string[],
+	keys?: string[],
+	non_keys?: string[]
 }
 
 type MYSQL_CREDENTIALS = {
@@ -17,17 +21,60 @@ type MYSQL_CREDENTIALS = {
 const sequelize_connections: Sequelize[] = [];
 const mysql_actions: mysql_action[] = [];
 
+const get_model_field_list = async (model: ModelStatic<any>, model_list: {all?: boolean, primary?: boolean} ) => {
+	const {all= false, primary = false} = model_list;
+
+	return await Promise.all(Object.entries(await model.describe())
+		// eslint-disable-next-line no-unused-vars
+		.filter( ([key, value]) => all ? true : primary ? value.primaryKey : !value.primaryKey )
+		// eslint-disable-next-line no-unused-vars
+		.map( ([key, value]) => key ));
+};
+
+const check_connect = async (MYSQL_CREDENTIALS: MYSQL_CREDENTIALS) => {
+	console.log('[База данных]', 'Проверка соединения');
+	const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
+
+	try {			
+		const connection = await createConnection(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`);
+
+		for (let DB_NAME of DATABASES){
+			await connection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;`);
+		}			
+		await connection.end();
+
+		return true;
+	} catch (e: any){
+		console.error('проверьте правильность данных\n');
+		
+		Object.entries(MYSQL_CREDENTIALS).forEach( ([key, val]) => !val? 
+			console.log( `${key}: Ошибка: отсутствует значение\n`) : null );
+
+		if (e.code === 'ECONNREFUSED'){
+			console.error('База данных', 'ошибка соединения', 'Нет доступа к базе');
+		} else {
+			console.error('База данных', 'ошибка базы', e );
+		}
+
+		return false;
+	}
+}
+
 export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging = false ) => {
 
 	const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
 
 	console.log('[База данных]', 'Подготовка баз данных');
+
+	if ( !(await check_connect(MYSQL_CREDENTIALS)) ){
+		throw new Error('Нет доступа к базе');
+	}
+
 	try {
-		const connection = await createConnection(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`);
 		const results = [];
 		if (DATABASES && typeof DATABASES.length !== 'undefined' && DATABASES.length > 0){
 			for (let DB_NAME of DATABASES){
-				await connection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;`);
+				
 				const sequelize_connection = new Sequelize( DB_NAME, DB_USER, DB_PASSWORD, { 
 					dialect: 'mysql',
 					define: {
@@ -39,8 +86,8 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 				});
 				results.push(sequelize_connection);
 				sequelize_connections.push(sequelize_connection);
-			}			
-			await connection.end();
+			}
+
 			return results;
 		} else {
 			throw new Error('[База данных] DATABASES не установлены');
@@ -59,7 +106,14 @@ export const prepareEND = async (logging = false, alter = false) => {
 	for (let sequelize_connection of sequelize_connections) {
 		await sequelize_connection.sync({ logging, alter });
 	}
+	await Promise.all( mysql_actions.map( async ({ names, model }, i, a) => {
+		a[i].attributes = Object.entries(await a[i].model.describe()).map( ([name, attribute ]) => ({ name, attribute }) );
+		a[i].fileds = await get_model_field_list( model, {all: true} );
+		a[i].keys = await get_model_field_list( model, {primary: true} );
+		a[i].non_keys = (a[i].fileds as string[]).filter( v =>!(a[i].keys as string[]).includes( v ) );
+	}));
 	console.log('[База данных]', 'Подготовка завершена');
+	console.log('mysql_actions', mysql_actions);
 }
 
 export const add_model_names = (action: mysql_action) => mysql_actions.push(action);

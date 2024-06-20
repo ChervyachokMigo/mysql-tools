@@ -2,6 +2,13 @@ import { Sequelize, ModelStatic } from '@sequelize/core';
 type mysql_action = {
     names: string | string[];
     model: ModelStatic<any>;
+    attributes?: {
+        name: string;
+        attribute: any;
+    }[];
+    fileds?: string[];
+    keys?: string[];
+    non_keys?: string[];
 };
 type MYSQL_CREDENTIALS = {
     DB_HOST: string;
