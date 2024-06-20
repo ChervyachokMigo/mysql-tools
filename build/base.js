@@ -38,6 +38,7 @@ const MYSQL_GET_ALL = (PARAMS) => __awaiter(void 0, void 0, void 0, function* ()
             throw new Error(`Нет доступа к базе данных.`);
         }
         else {
+            console.error('action', action, 'params', params, 'attributes', attributes);
             throw new Error(e);
         }
     }

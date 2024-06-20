@@ -38,12 +38,11 @@ export const MYSQL_GET_ALL = async ( PARAMS: GET_ALL_PARAMS ) => {
 		if (e.code === 'ECONNREFUSED' || e.name === `SequelizeConnectionRefusedError`){
 			throw new Error(`Нет доступа к базе данных.`);
 		} else {
+			console.error( 'action', action, 'params', params, 'attributes', attributes );
 			throw new Error(e);
 		}
 	}    
 }
-
-
 
 export const MYSQL_UPDATE = async ( action: string | null = null, condition: WhereOptions = {}, values: UpdateValues<any> = {} ) => {
 
