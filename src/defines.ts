@@ -132,6 +132,8 @@ export const add_model_names = (action: mysql_action) => mysql_actions.push(acti
 
 export const get_models_names = () => mysql_actions.map( x => x.names );
 
+export const find_model = (name: string) => mysql_actions.find( x => x.names === name);
+
 export const select_mysql_model = (action: string | null): ModelStatic => {
 
 	const MysqlModel = mysql_actions.find ( model => {

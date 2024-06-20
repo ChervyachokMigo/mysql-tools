@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.select_mysql_model = exports.get_models_names = exports.add_model_names = exports.prepareEND = exports.prepareDB = void 0;
+exports.select_mysql_model = exports.find_model = exports.get_models_names = exports.add_model_names = exports.prepareEND = exports.prepareDB = void 0;
 const promise_1 = require("mysql2/promise");
 const core_1 = require("@sequelize/core");
 const sequelize_connections = [];
@@ -114,6 +114,8 @@ const add_model_names = (action) => mysql_actions.push(action);
 exports.add_model_names = add_model_names;
 const get_models_names = () => mysql_actions.map(x => x.names);
 exports.get_models_names = get_models_names;
+const find_model = (name) => mysql_actions.find(x => x.names === name);
+exports.find_model = find_model;
 const select_mysql_model = (action) => {
     const MysqlModel = mysql_actions.find(model => {
         if (typeof model.names === 'string') {
