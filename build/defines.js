@@ -9,11 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.select_mysql_model = exports.add_model_names = exports.prepareEND = exports.prepareDB = void 0;
+exports.select_mysql_model = exports.get_models_names = exports.add_model_names = exports.prepareEND = exports.prepareDB = void 0;
 const promise_1 = require("mysql2/promise");
 const core_1 = require("@sequelize/core");
 const sequelize_connections = [];
 const mysql_actions = [];
+/**
+* @param {Model} Model Execute model
+* @param {Boolean} all If true get all fields, else get only non-primary keys or only primary keys
+* @param {Boolean} primary If true get only primary keys, else get only non-primary keys
+* @return {Array} Array of fields of Model
+*/
 const get_model_field_list = (model, model_list) => __awaiter(void 0, void 0, void 0, function* () {
     const { all = false, primary = false } = model_list;
     return yield Promise.all(Object.entries(yield model.describe())
@@ -64,6 +70,13 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
                         deletedAt: false
                     },
                     logging,
+                    pool: {
+                        max: 30,
+                        min: 0,
+                        acquire: 60000,
+                        idle: 60000
+                    },
+                    noTypeValidation: true,
                 });
                 results.push(sequelize_connection);
                 sequelize_connections.push(sequelize_connection);
@@ -99,6 +112,8 @@ const prepareEND = (...args_2) => __awaiter(void 0, [...args_2], void 0, functio
 exports.prepareEND = prepareEND;
 const add_model_names = (action) => mysql_actions.push(action);
 exports.add_model_names = add_model_names;
+const get_models_names = () => mysql_actions.map(x => x.names);
+exports.get_models_names = get_models_names;
 const select_mysql_model = (action) => {
     const MysqlModel = mysql_actions.find(model => {
         if (typeof model.names === 'string') {

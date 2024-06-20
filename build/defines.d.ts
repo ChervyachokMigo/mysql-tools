@@ -20,6 +20,7 @@ type MYSQL_CREDENTIALS = {
 export declare const prepareDB: (MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging?: boolean) => Promise<Sequelize[]>;
 export declare const prepareEND: (logging?: boolean, alter?: boolean) => Promise<void>;
 export declare const add_model_names: (action: mysql_action) => number;
+export declare const get_models_names: () => (string | string[])[];
 export declare const select_mysql_model: (action: string | null) => ModelStatic;
 export {};
 //# sourceMappingURL=defines.d.ts.map

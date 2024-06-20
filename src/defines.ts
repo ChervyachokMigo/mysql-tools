@@ -21,6 +21,12 @@ type MYSQL_CREDENTIALS = {
 const sequelize_connections: Sequelize[] = [];
 const mysql_actions: mysql_action[] = [];
 
+/** 
+* @param {Model} Model Execute model
+* @param {Boolean} all If true get all fields, else get only non-primary keys or only primary keys
+* @param {Boolean} primary If true get only primary keys, else get only non-primary keys
+* @return {Array} Array of fields of Model
+*/
 const get_model_field_list = async (model: ModelStatic<any>, model_list: {all?: boolean, primary?: boolean} ) => {
 	const {all= false, primary = false} = model_list;
 
@@ -83,6 +89,13 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 						deletedAt: false
 					},
 					logging,
+					pool: {
+						max: 30,
+						min: 0,
+						acquire: 60000,
+						idle: 60000
+					},
+					noTypeValidation: true, 
 				});
 				results.push(sequelize_connection);
 				sequelize_connections.push(sequelize_connection);
@@ -116,6 +129,8 @@ export const prepareEND = async (logging = false, alter = false) => {
 }
 
 export const add_model_names = (action: mysql_action) => mysql_actions.push(action);
+
+export const get_models_names = () => mysql_actions.map( x => x.names );
 
 export const select_mysql_model = (action: string | null): ModelStatic => {
 
