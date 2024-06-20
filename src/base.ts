@@ -1,12 +1,14 @@
 
+import { CreationAttributes, FindAttributeOptions, Literal, Order, UpdateValues, UpsertOptions, WhereOptions } from "@sequelize/core";
 import { select_mysql_model } from "./defines";
+import { Nullish } from "@sequelize/core/types/utils/types";
 
-export const MYSQL_GET_ONE = async (action, condition) => {
+export const MYSQL_GET_ONE = async (action: string | null = null, condition: WhereOptions = {} ) => {
 	const MysqlModel = select_mysql_model(action);
 
 	try {
 		return await MysqlModel.findOne({ where: condition , logging: false, raw: true });
-	} catch (e){
+	} catch (e: any){
 		if (e.code === 'ECONNREFUSED' || e.name === `SequelizeConnectionRefusedError`){
 			throw new Error(`Нет доступа к базе данных.`);
 		} else {
@@ -15,13 +17,24 @@ export const MYSQL_GET_ONE = async (action, condition) => {
 	}
 }
 
-    
-export const MYSQL_GET_ALL = async ({ action, params = {}, attributes = undefined, limit = null, order = null }) => {
+type GET_ALL_PARAMS = {
+	action: string | null;
+	params?: WhereOptions;
+	attributes?: FindAttributeOptions;
+	limit?: Nullish<number | Literal>;
+	order?: Order
+}
+
+export const MYSQL_GET_ALL = async ( PARAMS: GET_ALL_PARAMS ) => {
+
+	//Set default values
+	const {action = null, params = {}, attributes = undefined, limit = null, order = undefined} = PARAMS;
+
 	const MysqlModel = select_mysql_model(action);
 
 	try{
 		return await MysqlModel.findAll ({ where: params, logging: false, raw: true, attributes, limit, order });
-	} catch (e){
+	} catch (e: any){
 		if (e.code === 'ECONNREFUSED' || e.name === `SequelizeConnectionRefusedError`){
 			throw new Error(`Нет доступа к базе данных.`);
 		} else {
@@ -30,20 +43,23 @@ export const MYSQL_GET_ALL = async ({ action, params = {}, attributes = undefine
 	}    
 }
 
-export const MYSQL_UPDATE = async (action, condition = null, values = {}) => {
+
+
+export const MYSQL_UPDATE = async ( action: string | null = null, condition: WhereOptions = {}, values: UpdateValues<any> = {} ) => {
+
 	const MysqlModel = select_mysql_model(action);
 
-	if (!condition) {
+	if (!condition || Object.keys(values).length == 0) {
 		throw new Error(`DB: (mysql update) undefined condition`);
 	}
 
-	if (!values) {
+	if (!values || Object.keys(values).length == 0) {
 		throw new Error(`DB: (mysql update) undefined values`);
 	}
 
 	try{
 		return await MysqlModel.update(values, { where: condition, logging: false });
-	} catch (e){
+	} catch (e: any){
 		if (e.code === 'ECONNREFUSED' || e.name === `SequelizeConnectionRefusedError`){
 			throw new Error(`Нет доступа к базе данных.`);
 		} else {
@@ -52,7 +68,8 @@ export const MYSQL_UPDATE = async (action, condition = null, values = {}) => {
 	}    
 }
 
-export const MYSQL_DELETE = async (action, condition = null) => {
+export const MYSQL_DELETE = async ( action: string | null = null, condition: WhereOptions = {} ) => {
+
 	const MysqlModel = select_mysql_model(action);
 
 	if (!condition) {
@@ -67,7 +84,7 @@ export const MYSQL_DELETE = async (action, condition = null) => {
 		return await MysqlModel.destroy({
 			where: condition, logging: false
 		});
-	} catch (e){
+	} catch (e: any){
 		if (e.code === 'ECONNREFUSED' || e.name === `SequelizeConnectionRefusedError`){
 			throw new Error(`Нет доступа к базе данных.`);
 		} else {
@@ -76,24 +93,16 @@ export const MYSQL_DELETE = async (action, condition = null) => {
 	}   
 }
 
-export const MYSQL_SAVE = async ( action, condition, values, ignore_duplicates = true ) => {
+export const MYSQL_SAVE = async ( action: string | null = null, values: CreationAttributes<any> | ReadonlyArray<any>, ignore_duplicates = true ) => {
 	const MysqlModel = select_mysql_model(action);
-
-	if ( !condition || (Object.keys(condition).length == 0) ){
-		throw new Error(`DB: (mysql save) отсутствует условия для сохранения, таблица ${action}`);
-	}
-
-	if ( condition && Object.keys(condition).length > 0 ){
-		values = {...values, ...condition};
-	}
 
 	try {
 		if (typeof values.length !== 'undefined' && values.length > 0){
-			return await MysqlModel.bulkCreate(values, { logging: false, ignoreDuplicates: ignore_duplicates })
+			return await MysqlModel.bulkCreate(values as ReadonlyArray<any>, { logging: false, ignoreDuplicates: ignore_duplicates })
 		} else {
-			return (await MysqlModel.upsert(values, { where: condition, logging: false, raw: true })).shift();
+			return (await MysqlModel.upsert(values as CreationAttributes<any>, { logging: false })).shift();
 		}
-	} catch (e){
+	} catch (e: any){
 		if (e.code === 'ECONNREFUSED' || e.name === `SequelizeConnectionRefusedError`){
 			throw new Error(`Нет доступа к базе данных.`);
 		} else {
