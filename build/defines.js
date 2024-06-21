@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.select_mysql_model = exports.find_model = exports.get_models_names = exports.add_model_names = exports.prepareEND = exports.prepareDB = void 0;
+exports.select_mysql_model = exports.find_model = exports.get_models_names = exports.add_model_names = exports.get_connection = exports.prepareEND = exports.prepareDB = void 0;
 const promise_1 = require("mysql2/promise");
 const core_1 = require("@sequelize/core");
 const sequelize_connections = [];
@@ -79,7 +79,7 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
                     noTypeValidation: true,
                 });
                 results.push(sequelize_connection);
-                sequelize_connections.push(sequelize_connection);
+                sequelize_connections.push({ connection: sequelize_connection, name: DB_NAME });
             }
             return results;
         }
@@ -99,7 +99,7 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
 exports.prepareDB = prepareDB;
 const prepareEND = (...args_2) => __awaiter(void 0, [...args_2], void 0, function* (logging = false, alter = false) {
     for (let sequelize_connection of sequelize_connections) {
-        yield sequelize_connection.sync({ logging, alter });
+        yield sequelize_connection.connection.sync({ logging, alter });
     }
     yield Promise.all(mysql_actions.map((_a, i_1, a_1) => __awaiter(void 0, [_a, i_1, a_1], void 0, function* ({ names, model }, i, a) {
         a[i].attributes = Object.entries(yield a[i].model.describe()).map(([name, attribute]) => ({ name, attribute }));
@@ -110,6 +110,8 @@ const prepareEND = (...args_2) => __awaiter(void 0, [...args_2], void 0, functio
     console.log('[База данных]', 'Подготовка завершена');
 });
 exports.prepareEND = prepareEND;
+const get_connection = (DB_NAME) => sequelize_connections.find(x => x.name === DB_NAME);
+exports.get_connection = get_connection;
 const add_model_names = (action) => mysql_actions.push(action);
 exports.add_model_names = add_model_names;
 const get_models_names = () => mysql_actions.map(x => x.names);

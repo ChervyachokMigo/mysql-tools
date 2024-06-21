@@ -17,8 +17,13 @@ type MYSQL_CREDENTIALS = {
     DB_PASSWORD: string;
     DATABASES: string[];
 };
+type sequelize_connection = {
+    connection: Sequelize;
+    name: string;
+};
 export declare const prepareDB: (MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging?: boolean) => Promise<Sequelize[]>;
 export declare const prepareEND: (logging?: boolean, alter?: boolean) => Promise<void>;
+export declare const get_connection: (DB_NAME: string) => sequelize_connection | undefined;
 export declare const add_model_names: (action: mysql_action) => number;
 export declare const get_models_names: () => (string | string[])[];
 export declare const find_model: (name: string) => mysql_action | undefined;
