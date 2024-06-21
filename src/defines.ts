@@ -18,7 +18,12 @@ type MYSQL_CREDENTIALS = {
     DATABASES: string[],
 }
 
-const sequelize_connections: Sequelize[] = [];
+type sequelize_connection = {
+	connection: Sequelize,
+	name: string
+}
+
+const sequelize_connections: sequelize_connection[] = [];
 const mysql_actions: mysql_action[] = [];
 
 /** 
@@ -98,7 +103,7 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 					noTypeValidation: true, 
 				});
 				results.push(sequelize_connection);
-				sequelize_connections.push(sequelize_connection);
+				sequelize_connections.push({ connection: sequelize_connection, name: DB_NAME });
 			}
 
 			return results;
@@ -117,7 +122,7 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 
 export const prepareEND = async (logging = false, alter = false) => {
 	for (let sequelize_connection of sequelize_connections) {
-		await sequelize_connection.sync({ logging, alter });
+		await sequelize_connection.connection.sync({ logging, alter });
 	}
 	await Promise.all( mysql_actions.map( async ({ names, model }, i, a) => {
 		a[i].attributes = Object.entries(await a[i].model.describe()).map( ([name, attribute ]) => ({ name, attribute }) );
@@ -127,6 +132,8 @@ export const prepareEND = async (logging = false, alter = false) => {
 	}));
 	console.log('[База данных]', 'Подготовка завершена');
 }
+
+export const get_connection = (DB_NAME: string) => sequelize_connections.find( x => x.name === DB_NAME );
 
 export const add_model_names = (action: mysql_action) => mysql_actions.push(action);
 
