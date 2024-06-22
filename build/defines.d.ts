@@ -11,8 +11,8 @@ type mysql_action = {
     non_keys?: string[];
 };
 type MYSQL_CREDENTIALS = {
-    DB_HOST: string;
-    DB_PORT: number;
+    DB_HOST?: string;
+    DB_PORT?: number;
     DB_USER: string;
     DB_PASSWORD: string;
     DATABASES: string[];

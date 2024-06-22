@@ -11,8 +11,8 @@ type mysql_action = {
 }
 
 type MYSQL_CREDENTIALS = {
-    DB_HOST: string,
-    DB_PORT: number,
+    DB_HOST?: string,
+    DB_PORT?: number,
 	DB_USER: string,
     DB_PASSWORD: string,
     DATABASES: string[],
@@ -22,6 +22,9 @@ type sequelize_connection = {
 	connection: Sequelize,
 	name: string
 }
+
+const DEFAULT_HOST = 'localhost';
+const DEFAULT_PORT = 3306;
 
 const sequelize_connections: sequelize_connection[] = [];
 const mysql_actions: mysql_action[] = [];
@@ -47,7 +50,7 @@ const check_connect = async (MYSQL_CREDENTIALS: MYSQL_CREDENTIALS) => {
 	const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
 
 	try {			
-		const connection = await createConnection(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`);
+		const connection = await createConnection(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}`);
 
 		for (let DB_NAME of DATABASES){
 			await connection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;`);
@@ -87,6 +90,8 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 			for (let DB_NAME of DATABASES){
 				
 				const sequelize_connection = new Sequelize( DB_NAME, DB_USER, DB_PASSWORD, { 
+					host: DB_HOST || DEFAULT_HOST,  
+					port: DB_PORT || DEFAULT_PORT,
 					dialect: 'mysql',
 					define: {
 						updatedAt: false,

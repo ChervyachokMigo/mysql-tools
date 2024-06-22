@@ -12,6 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.select_mysql_model = exports.find_model = exports.get_models_names = exports.add_model_names = exports.get_connection = exports.prepareEND = exports.prepareDB = void 0;
 const promise_1 = require("mysql2/promise");
 const core_1 = require("@sequelize/core");
+const DEFAULT_HOST = 'localhost';
+const DEFAULT_PORT = 3306;
 const sequelize_connections = [];
 const mysql_actions = [];
 /**
@@ -32,7 +34,7 @@ const check_connect = (MYSQL_CREDENTIALS) => __awaiter(void 0, void 0, void 0, f
     console.log('[База данных]', 'Проверка соединения');
     const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
     try {
-        const connection = yield (0, promise_1.createConnection)(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}`);
+        const connection = yield (0, promise_1.createConnection)(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}`);
         for (let DB_NAME of DATABASES) {
             yield connection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;`);
         }
@@ -63,6 +65,8 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
         if (DATABASES && typeof DATABASES.length !== 'undefined' && DATABASES.length > 0) {
             for (let DB_NAME of DATABASES) {
                 const sequelize_connection = new core_1.Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+                    host: DB_HOST || DEFAULT_HOST,
+                    port: DB_PORT || DEFAULT_PORT,
                     dialect: 'mysql',
                     define: {
                         updatedAt: false,
