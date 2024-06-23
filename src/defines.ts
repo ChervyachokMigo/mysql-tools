@@ -168,8 +168,10 @@ export const define_model = (connection: Sequelize, names: string | string[], fi
 	});
 
 	if (founded_model) {
-		console.log('skip model', model_name);
+		console.log('found model', model_name);
 		return founded_model.model;
+	} else {
+		console.log('not found model', model_name);
 	}
 
 	const model = connection.define(model_name, fields, options);
