@@ -3,7 +3,7 @@ import { existsSync } from "node:fs";
 import path from "path";
 
 
-export const pack_csvs = async (folder_path: string, archive_name: string) => {
+export const pack_csvs = async (folder_path: string, archive_name: string, delete_files = false) => {
 	if (!folder_path || !existsSync(folder_path)){
 		throw new Error('Error in module "pack table to csv": no exists folder path');
 	}
@@ -26,6 +26,7 @@ export const pack_csvs = async (folder_path: string, archive_name: string) => {
 		'a',    //add files
 		'-y',   //assume yes
 		'-mx9', //compression level
+		delete_files ? '-sdel' : '',
 		archive_path,
 		files_pattern
 	];

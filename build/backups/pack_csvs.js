@@ -16,7 +16,7 @@ exports.pack_csvs = void 0;
 const node_child_process_1 = require("node:child_process");
 const node_fs_1 = require("node:fs");
 const path_1 = __importDefault(require("path"));
-const pack_csvs = (folder_path, archive_name) => __awaiter(void 0, void 0, void 0, function* () {
+const pack_csvs = (folder_path_1, archive_name_1, ...args_1) => __awaiter(void 0, [folder_path_1, archive_name_1, ...args_1], void 0, function* (folder_path, archive_name, delete_files = false) {
     if (!folder_path || !(0, node_fs_1.existsSync)(folder_path)) {
         throw new Error('Error in module "pack table to csv": no exists folder path');
     }
@@ -33,6 +33,7 @@ const pack_csvs = (folder_path, archive_name) => __awaiter(void 0, void 0, void 
         'a', //add files
         '-y', //assume yes
         '-mx9', //compression level
+        delete_files ? '-sdel' : '',
         archive_path,
         files_pattern
     ];
