@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.select_mysql_model = exports.get_attributes_types = exports.find_model = exports.get_models_names = exports.add_model_names = exports.get_connection = exports.prepareEND = exports.prepareDB = void 0;
+exports.select_mysql_model = exports.get_attributes_types = exports.find_model = exports.get_models_names = exports.define_model = exports.add_model_names = exports.get_connection = exports.prepareEND = exports.prepareDB = void 0;
 const promise_1 = require("mysql2/promise");
 const core_1 = require("@sequelize/core");
 const DEFAULT_HOST = 'localhost';
@@ -118,6 +118,35 @@ const get_connection = (DB_NAME) => sequelize_connections.find(x => x.name === D
 exports.get_connection = get_connection;
 const add_model_names = (action) => mysql_actions.push(action);
 exports.add_model_names = add_model_names;
+const define_model = (connection, names, fields, options) => {
+    const model_name = Array.isArray(names) ? names[0] : names;
+    const founded_model = mysql_actions.find(x => {
+        if (Array.isArray(x.names)) {
+            if (Array.isArray(names)) {
+                return x.names.findIndex(y => names.findIndex(z => z === y) > -1) > -1;
+            }
+            else {
+                return x.names.findIndex(y => names.indexOf(y) > -1) > -1;
+            }
+        }
+        else {
+            if (Array.isArray(names)) {
+                return names.findIndex(y => y === x.names) > -1;
+            }
+            else {
+                return x.names === names;
+            }
+        }
+    });
+    if (founded_model) {
+        console.log('skip model', model_name);
+        return founded_model.model;
+    }
+    const model = connection.define(model_name, fields, options);
+    (0, exports.add_model_names)({ names, model });
+    return model;
+};
+exports.define_model = define_model;
 const get_models_names = () => mysql_actions.map(x => x.names);
 exports.get_models_names = get_models_names;
 const find_model = (name) => mysql_actions.find(x => x.names === name);

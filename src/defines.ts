@@ -1,5 +1,5 @@
 import { createConnection } from 'mysql2/promise';
-import { Sequelize, ModelStatic } from '@sequelize/core';
+import { Sequelize, ModelStatic, ModelAttributes, ModelOptions } from '@sequelize/core';
 
 type action_model_attribute = {
 	name: string, 
@@ -146,6 +146,38 @@ export const prepareEND = async (logging = false, alter = false) => {
 export const get_connection = (DB_NAME: string) => sequelize_connections.find( x => x.name === DB_NAME );
 
 export const add_model_names = (action: mysql_action) => mysql_actions.push(action);
+
+export const define_model = (connection: Sequelize, names: string | string[], fields?: ModelAttributes<any>, options?: ModelOptions<any> ) => {
+	
+	const model_name = Array.isArray(names) ? names[0] : names;
+	
+	const founded_model = mysql_actions.find( x => {
+		if (Array.isArray(x.names)){
+			if (Array.isArray(names)){
+				return x.names.findIndex( y => names.findIndex( z => z === y) > -1) > -1;
+			} else {
+				return x.names.findIndex( y => names.indexOf(y) > -1) > -1;
+			}
+		} else {
+			if (Array.isArray(names)){
+				return names.findIndex( y => y === x.names ) > -1
+			} else {
+				return x.names === names
+			}
+		}
+	});
+
+	if (founded_model) {
+		console.log('skip model', model_name);
+		return founded_model.model;
+	}
+
+	const model = connection.define(model_name, fields, options);
+
+	add_model_names({ names, model });
+
+	return model;
+}
 
 export const get_models_names = () => mysql_actions.map( x => x.names );
 
