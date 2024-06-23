@@ -69,7 +69,7 @@ export const export_table_csv = async ( csv_params: CSV_PARAMS ) => {
 		}
 
 		console.log('geting all data');
-		const values = await MYSQL_GET_ALL({ action: tablename });
+		const values = await MYSQL_GET_ALL({ action: Array.isArray(tablename) ? tablename[0] : tablename });
 
 		console.log('recived', values.length, 'rows');
 

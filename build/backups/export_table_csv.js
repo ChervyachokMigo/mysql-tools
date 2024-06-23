@@ -83,7 +83,7 @@ const export_table_csv = (csv_params) => __awaiter(void 0, void 0, void 0, funct
         return false;
     }
     console.log('geting all data');
-    const values = yield (0, base_1.MYSQL_GET_ALL)({ action: tablename });
+    const values = yield (0, base_1.MYSQL_GET_ALL)({ action: Array.isArray(tablename) ? tablename[0] : tablename });
     console.log('recived', values.length, 'rows');
     save_csv(csv_params, values);
 });
