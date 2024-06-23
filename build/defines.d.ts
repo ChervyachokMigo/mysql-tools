@@ -1,11 +1,12 @@
 import { Sequelize, ModelStatic } from '@sequelize/core';
+type action_model_attribute = {
+    name: string;
+    attribute: any;
+};
 type mysql_action = {
     names: string | string[];
     model: ModelStatic<any>;
-    attributes?: {
-        name: string;
-        attribute: any;
-    }[];
+    attributes?: action_model_attribute[];
     fileds?: string[];
     keys?: string[];
     non_keys?: string[];
@@ -27,6 +28,7 @@ export declare const get_connection: (DB_NAME: string) => sequelize_connection |
 export declare const add_model_names: (action: mysql_action) => number;
 export declare const get_models_names: () => (string | string[])[];
 export declare const find_model: (name: string) => mysql_action | undefined;
+export declare const get_attributes_types: (name: string) => any[];
 export declare const select_mysql_model: (action: string | null) => ModelStatic;
 export {};
 //# sourceMappingURL=defines.d.ts.map

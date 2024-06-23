@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.select_mysql_model = exports.find_model = exports.get_models_names = exports.add_model_names = exports.get_connection = exports.prepareEND = exports.prepareDB = void 0;
+exports.select_mysql_model = exports.get_attributes_types = exports.find_model = exports.get_models_names = exports.add_model_names = exports.get_connection = exports.prepareEND = exports.prepareDB = void 0;
 const promise_1 = require("mysql2/promise");
 const core_1 = require("@sequelize/core");
 const DEFAULT_HOST = 'localhost';
@@ -122,6 +122,8 @@ const get_models_names = () => mysql_actions.map(x => x.names);
 exports.get_models_names = get_models_names;
 const find_model = (name) => mysql_actions.find(x => x.names === name);
 exports.find_model = find_model;
+const get_attributes_types = (name) => (0, exports.find_model)(name).attributes.map(x => x.attribute.type);
+exports.get_attributes_types = get_attributes_types;
 const select_mysql_model = (action) => {
     const MysqlModel = mysql_actions.find(model => {
         if (typeof model.names === 'string') {

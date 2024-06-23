@@ -1,10 +1,15 @@
 import { createConnection } from 'mysql2/promise';
 import { Sequelize, ModelStatic } from '@sequelize/core';
 
+type action_model_attribute = {
+	name: string, 
+	attribute: any
+}
+
 type mysql_action = {
 	names: string | string[],
     model: ModelStatic<any>,
-	attributes?: {name: string, attribute: any}[],
+	attributes?: action_model_attribute[],
 	fileds?: string[],
 	keys?: string[],
 	non_keys?: string[]
@@ -145,6 +150,8 @@ export const add_model_names = (action: mysql_action) => mysql_actions.push(acti
 export const get_models_names = () => mysql_actions.map( x => x.names );
 
 export const find_model = (name: string) => mysql_actions.find( x => x.names === name);
+
+export const get_attributes_types = (name: string) => ((find_model(name) as mysql_action).attributes as action_model_attribute[]).map( x => x.attribute.type);
 
 export const select_mysql_model = (action: string | null): ModelStatic => {
 

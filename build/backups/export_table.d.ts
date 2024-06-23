@@ -10,4 +10,4 @@ declare const _this: {
     export_table_csv: (tablename: any, string_quotes?: string, separator?: string) => Promise<false | undefined>;
     save_csv: (values: null | undefined, tablename: any, string_quotes?: string, separator?: string) => false | undefined;
 };
-//# sourceMappingURL=export_db.d.ts.map
+//# sourceMappingURL=export_table.d.ts.map
