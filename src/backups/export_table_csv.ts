@@ -36,11 +36,9 @@ const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_frequeren
 		for ( let i = 0; i < values.length; i++ ){
 			if (values.length >= print_frequerency) {
 				if (i % Math.trunc(values.length / print_frequerency) == 0) {
-					console.clear();
 					console.log( `processed "${tablename}" ${(i/values.length*100).toFixed(0)}%` );
 				}
 			} else {
-				console.clear();
 				console.log( `processed "${tablename}" ${(i/values.length*100).toFixed(0)}%` );
 			}
 
