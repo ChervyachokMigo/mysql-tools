@@ -17,3 +17,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./defines"), exports);
 __exportStar(require("./base"), exports);
 __exportStar(require("./backups/pack_csvs"), exports);
+__exportStar(require("./backups/export_table_csv"), exports);
