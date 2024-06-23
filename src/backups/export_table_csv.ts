@@ -12,7 +12,7 @@ export type CSV_PARAMS = {
     separator: string,
 }
 
-const save_csv = (csv_params: CSV_PARAMS, values: string[] = []) => {
+const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_frequerency = 10) => {
 
 	const {folder_path = '', tablename, string_quotes = '"', separator = ';'} = csv_params;
 
@@ -34,12 +34,14 @@ const save_csv = (csv_params: CSV_PARAMS, values: string[] = []) => {
 		data.push( types );
 
 		for ( let i = 0; i < values.length; i++ ){
-			if (values.length > 99) {
-				if (i % Math.trunc(values.length / 100) == 0) {
-					console.log( `processed "${tablename}" ${(i/values.length).toFixed(0)}%` );
+			if (values.length >= print_frequerency) {
+				if (i % Math.trunc(values.length / print_frequerency) == 0) {
+					console.clear();
+					console.log( `processed "${tablename}" ${(i/values.length*100).toFixed(0)}%` );
 				}
 			} else {
-				console.log( `processed "${tablename}" ${(i/values.length).toFixed(0)}%` );
+				console.clear();
+				console.log( `processed "${tablename}" ${(i/values.length*100).toFixed(0)}%` );
 			}
 
 			data.push( Object.values(values[i]).map( x => 

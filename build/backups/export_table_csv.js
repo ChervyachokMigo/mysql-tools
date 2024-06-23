@@ -38,7 +38,7 @@ const defines_1 = require("../defines");
 const node_fs_1 = require("node:fs");
 const path = __importStar(require("node:path"));
 const tools_1 = require("../misc/tools");
-const save_csv = (csv_params, values = []) => {
+const save_csv = (csv_params, values = [], print_frequerency = 10) => {
     const { folder_path = '', tablename, string_quotes = '"', separator = ';' } = csv_params;
     (0, tools_1.folder_prepare)(folder_path);
     if (values && Array.isArray(values) && values.length > 0) {
@@ -54,13 +54,15 @@ const save_csv = (csv_params, values = []) => {
         data.push(header);
         data.push(types);
         for (let i = 0; i < values.length; i++) {
-            if (values.length > 99) {
-                if (i % Math.trunc(values.length / 100) == 0) {
-                    console.log(`processed "${tablename}" ${(i / values.length).toFixed(0)}%`);
+            if (values.length >= print_frequerency) {
+                if (i % Math.trunc(values.length / print_frequerency) == 0) {
+                    console.clear();
+                    console.log(`processed "${tablename}" ${(i / values.length * 100).toFixed(0)}%`);
                 }
             }
             else {
-                console.log(`processed "${tablename}" ${(i / values.length).toFixed(0)}%`);
+                console.clear();
+                console.log(`processed "${tablename}" ${(i / values.length * 100).toFixed(0)}%`);
             }
             data.push(Object.values(values[i]).map(x => typeof x === 'string' ? `${string_quotes}${x}${string_quotes}` : x).join(separator));
         }
