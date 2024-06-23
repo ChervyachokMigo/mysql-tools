@@ -5,7 +5,7 @@ import { writeFileSync } from 'node:fs';
 import * as path from 'node:path';
 import { folder_prepare } from "../misc/tools";
 
-type CSV_PARAMS = {
+export type CSV_PARAMS = {
 	folder_path: string,
     tablename: string,
     string_quotes: string,
