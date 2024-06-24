@@ -82,7 +82,9 @@ const export_table_csv = (csv_params) => __awaiter(void 0, void 0, void 0, funct
     const { tablename = null } = csv_params;
     const action = Array.isArray(tablename) ? tablename[0] : tablename;
     if (!action || !(0, defines_1.find_model)(action)) {
-        console.error('tablename invalid', action);
+        console.error('tablename invalid');
+        console.error('action', action);
+        console.error('tablename', tablename);
         return {
             error: 'tablename invalid',
             action
