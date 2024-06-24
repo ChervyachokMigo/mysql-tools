@@ -80,12 +80,13 @@ const save_csv = (csv_params, values = [], print_frequerency = 10) => {
 };
 const export_table_csv = (csv_params) => __awaiter(void 0, void 0, void 0, function* () {
     const { tablename = null } = csv_params;
-    if (!tablename || typeof (0, defines_1.find_model)(tablename) === 'undefined') {
-        console.error('tablename invalid', tablename);
+    const action = Array.isArray(tablename) ? tablename[0] : tablename;
+    if (!action || typeof (0, defines_1.find_model)(action) === 'undefined') {
+        console.error('tablename invalid', action);
         return false;
     }
-    console.log('geting all data');
-    const values = yield (0, base_1.MYSQL_GET_ALL)({ action: Array.isArray(tablename) ? tablename[0] : tablename });
+    console.log('geting all data from', action);
+    const values = yield (0, base_1.MYSQL_GET_ALL)({ action });
     console.log('recived', values.length, 'rows');
     save_csv(csv_params, values);
 });

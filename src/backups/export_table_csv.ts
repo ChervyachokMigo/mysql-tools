@@ -68,13 +68,15 @@ export const export_table_csv = async ( csv_params: CSV_PARAMS ) => {
 
 		const {tablename = null} = csv_params;
 
-		if (!tablename || typeof find_model(tablename) === 'undefined') {
-			console.error('tablename invalid', tablename);
+		const action = Array.isArray(tablename) ? tablename[0] : tablename;
+
+		if (!action || typeof find_model(action) === 'undefined') {
+			console.error('tablename invalid', action);
 			return false;
 		}
 
-		console.log('geting all data');
-		const values = await MYSQL_GET_ALL({ action: Array.isArray(tablename) ? tablename[0] : tablename });
+		console.log('geting all data from', action);
+		const values = await MYSQL_GET_ALL({ action });
 
 		console.log('recived', values.length, 'rows');
 
