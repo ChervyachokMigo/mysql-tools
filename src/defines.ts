@@ -146,7 +146,10 @@ export const prepareEND = async (logging = false, alter = false) => {
 
 export const get_connection = (DB_NAME: string) => sequelize_connections.find( x => x.name === DB_NAME );
 
-export const add_model_names = (action: mysql_action) => mysql_actions.push(action);
+export const add_model_names = (action: mysql_action) => {
+	console.log('add_model_names', action)
+	mysql_actions.push(action);
+}
 
 export const define_model = (connection: Sequelize, names: string | string[], fields?: ModelAttributes<any>, options?: ModelOptions<any> ) => {
 	

@@ -116,7 +116,10 @@ const prepareEND = (...args_2) => __awaiter(void 0, [...args_2], void 0, functio
 exports.prepareEND = prepareEND;
 const get_connection = (DB_NAME) => sequelize_connections.find(x => x.name === DB_NAME);
 exports.get_connection = get_connection;
-const add_model_names = (action) => mysql_actions.push(action);
+const add_model_names = (action) => {
+    console.log('add_model_names', action);
+    mysql_actions.push(action);
+};
 exports.add_model_names = add_model_names;
 const define_model = (connection, names, fields, options) => {
     const names_lowcase = Array.isArray(names) ? names.map(x => x.toLocaleLowerCase()) : names.toLocaleLowerCase();
