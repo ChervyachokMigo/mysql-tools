@@ -29,7 +29,7 @@ export declare const get_connection: (DB_NAME: string) => sequelize_connection |
 export declare const add_model_names: (action: mysql_action) => void;
 export declare const define_model: (connection: Sequelize, names: string | string[], fields?: ModelAttributes<any>, options?: ModelOptions<any>) => ModelStatic<any>;
 export declare const get_models_names: () => (string | string[])[];
-export declare const find_model: (name: string) => mysql_action | undefined;
+export declare const find_model: (name: string) => mysql_action;
 export declare const get_attributes_types: (name: string) => any[];
 export declare const select_mysql_model: (action: string | null) => ModelStatic;
 export {};

@@ -189,18 +189,8 @@ export const define_model = (connection: Sequelize, names: string | string[], fi
 
 export const get_models_names = () => mysql_actions.map( x => x.names );
 
-export const find_model = (name: string) => mysql_actions.find( x => x.names === name.toLocaleLowerCase());
-
-export const get_attributes_types = (name: string) => ((find_model(name) as mysql_action).attributes as action_model_attribute[]).map( x => x.attribute.type);
-
-export const select_mysql_model = (action: string | null): ModelStatic => {
-
-	if (!action) {
-		console.error('[База данных]', '(select_mysql_model)', `empty action: ${action}`);
-		throw new Error(`unknown mysql model: ${action}`);
-	}
-
-	const name_lowcase = (action as string).toLocaleLowerCase();
+export const find_model = (name: string) => {
+	const name_lowcase = name.toLocaleLowerCase();
 
 	const MysqlModel = mysql_actions.find ( model => {
 		if (Array.isArray(model.names)){
@@ -215,5 +205,19 @@ export const select_mysql_model = (action: string | null): ModelStatic => {
 		throw new Error(`unknown mysql model: ${name_lowcase}`);
 	}
 
+	return MysqlModel
+}
+
+export const get_attributes_types = (name: string) => ((find_model(name) as mysql_action).attributes as action_model_attribute[]).map( x => x.attribute.type);
+
+export const select_mysql_model = (action: string | null): ModelStatic => {
+
+	if (!action) {
+		console.error('[База данных]', '(select_mysql_model)', `empty action: ${action}`);
+		throw new Error(`unknown mysql model: ${action}`);
+	}
+
+	const MysqlModel = find_model(action);
+	
 	return MysqlModel.model;
 }
