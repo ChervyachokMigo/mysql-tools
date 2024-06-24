@@ -70,7 +70,7 @@ export const export_table_csv = async ( csv_params: CSV_PARAMS ) => {
 
 		const action = Array.isArray(tablename) ? tablename[0] : tablename;
 
-		if (!action || find_model(action)) {
+		if (!action || !find_model(action)) {
 			console.error('tablename invalid', action);
 			return { 
 				error: 'tablename invalid', 
