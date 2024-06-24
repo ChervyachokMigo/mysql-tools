@@ -83,11 +83,18 @@ const export_table_csv = (csv_params) => __awaiter(void 0, void 0, void 0, funct
     const action = Array.isArray(tablename) ? tablename[0] : tablename;
     if (!action || typeof (0, defines_1.find_model)(action) === 'undefined') {
         console.error('tablename invalid', action);
-        return false;
+        return {
+            error: 'tablename invalid',
+            action
+        };
     }
     console.log('geting all data from', action);
     const values = yield (0, base_1.MYSQL_GET_ALL)({ action });
     console.log('recived', values.length, 'rows');
     save_csv(csv_params, values);
+    return {
+        success: values.length,
+        action
+    };
 });
 exports.export_table_csv = export_table_csv;

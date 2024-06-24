@@ -72,7 +72,10 @@ export const export_table_csv = async ( csv_params: CSV_PARAMS ) => {
 
 		if (!action || typeof find_model(action) === 'undefined') {
 			console.error('tablename invalid', action);
-			return false;
+			return { 
+				error: 'tablename invalid', 
+				action 
+			};
 		}
 
 		console.log('geting all data from', action);
@@ -82,5 +85,9 @@ export const export_table_csv = async ( csv_params: CSV_PARAMS ) => {
 
 		save_csv(csv_params, values);
 
+		return { 
+            success: values.length,
+            action 
+        };
 	}
 
