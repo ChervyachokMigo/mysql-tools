@@ -12,16 +12,13 @@ export type CSV_PARAMS = {
     separator: string,
 }
 
-const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_frequerency = 2) => {
+const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_frequerency = 1.1) => {
 
 	const {folder_path = '', tablename, string_quotes = '"', separator = ';'} = csv_params;
 
 	folder_prepare (folder_path);
 
-
-	if (values && Array.isArray(values) && values.length > 0){
-		console.log('preparing data');
-		
+	if (values && Array.isArray(values) && values.length > 0){		
 		const database_name = find_model( Array.isArray(tablename) ? tablename[0] : tablename )?.database;
 		const now = new Date();
 		const filename =  `${database_name}-${tablename}-${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}-` +
@@ -51,7 +48,7 @@ const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_frequeren
 		}
 
 		try {
-			console.log('saving csv');
+			console.log('saving', filename + '.csv');
 
 			writeFileSync(path.join( folder_path, filename + '.csv' ), data.join('\r\n'), { encoding: 'utf8' });
 
@@ -77,10 +74,9 @@ export const export_table_csv = async ( csv_params: CSV_PARAMS ) => {
 			};
 		}
 
-		console.log('geting all data from', action);
+		console.log('geting data from', action);
 		const values = await MYSQL_GET_ALL({ action });
-
-		console.log('recived', values.length, 'rows');
+		//console.log('recived', values.length, 'rows');
 
 		save_csv(csv_params, values);
 

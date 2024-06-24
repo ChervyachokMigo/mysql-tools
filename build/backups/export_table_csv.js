@@ -38,12 +38,11 @@ const defines_1 = require("../defines");
 const node_fs_1 = require("node:fs");
 const path = __importStar(require("node:path"));
 const tools_1 = require("../misc/tools");
-const save_csv = (csv_params, values = [], print_frequerency = 2) => {
+const save_csv = (csv_params, values = [], print_frequerency = 1.1) => {
     var _a;
     const { folder_path = '', tablename, string_quotes = '"', separator = ';' } = csv_params;
     (0, tools_1.folder_prepare)(folder_path);
     if (values && Array.isArray(values) && values.length > 0) {
-        console.log('preparing data');
         const database_name = (_a = (0, defines_1.find_model)(Array.isArray(tablename) ? tablename[0] : tablename)) === null || _a === void 0 ? void 0 : _a.database;
         const now = new Date();
         const filename = `${database_name}-${tablename}-${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}-` +
@@ -67,7 +66,7 @@ const save_csv = (csv_params, values = [], print_frequerency = 2) => {
             data.push(Object.values(values[i]).map(x => typeof x === 'string' ? `${string_quotes}${x}${string_quotes}` : x).join(separator));
         }
         try {
-            console.log('saving csv');
+            console.log('saving', filename + '.csv');
             (0, node_fs_1.writeFileSync)(path.join(folder_path, filename + '.csv'), data.join('\r\n'), { encoding: 'utf8' });
         }
         catch (e) {
@@ -87,9 +86,9 @@ const export_table_csv = (csv_params) => __awaiter(void 0, void 0, void 0, funct
             action
         };
     }
-    console.log('geting all data from', action);
+    console.log('geting data from', action);
     const values = yield (0, base_1.MYSQL_GET_ALL)({ action });
-    console.log('recived', values.length, 'rows');
+    //console.log('recived', values.length, 'rows');
     save_csv(csv_params, values);
     return {
         success: values.length,
