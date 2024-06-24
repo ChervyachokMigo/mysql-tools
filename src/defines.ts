@@ -159,13 +159,13 @@ export const define_model = (connection: Sequelize, names: string | string[], fi
 			if (Array.isArray(names_lowcase)){
 				return x.names.findIndex( y => names_lowcase.findIndex( z => z === y) > -1) > -1;
 			} else {
-				return x.names.findIndex( y => names_lowcase.indexOf(y) > -1) > -1;
+				return x.names.findIndex( y => names_lowcase === y ) > -1;
 			}
 		} else {
 			if (Array.isArray(names_lowcase)){
-				return names_lowcase.findIndex( y => y === x.names ) > -1
+				return names_lowcase.findIndex( y => y === x.names ) > -1;
 			} else {
-				return x.names === names_lowcase
+				return names_lowcase === x.names;
 			}
 		}
 	});

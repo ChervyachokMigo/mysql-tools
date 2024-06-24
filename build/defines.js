@@ -127,7 +127,7 @@ const define_model = (connection, names, fields, options) => {
                 return x.names.findIndex(y => names_lowcase.findIndex(z => z === y) > -1) > -1;
             }
             else {
-                return x.names.findIndex(y => names_lowcase.indexOf(y) > -1) > -1;
+                return x.names.findIndex(y => names_lowcase === y) > -1;
             }
         }
         else {
@@ -135,7 +135,7 @@ const define_model = (connection, names, fields, options) => {
                 return names_lowcase.findIndex(y => y === x.names) > -1;
             }
             else {
-                return x.names === names_lowcase;
+                return names_lowcase === x.names;
             }
         }
     });
