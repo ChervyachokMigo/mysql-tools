@@ -9,6 +9,7 @@ type action_model_attribute = {
 type mysql_action = {
 	names: string | string[],
     model: ModelStatic<any>,
+	database: string,
 	attributes?: action_model_attribute[],
 	fileds?: string[],
 	keys?: string[],
@@ -176,7 +177,7 @@ export const define_model = (connection: Sequelize, names: string | string[], fi
 
 	const model = connection.define(model_name, fields, options);
 
-	add_model_names({ names, model });
+	add_model_names({ names, model, database: connection.getDatabaseName() });
 
 	return model;
 }

@@ -6,6 +6,7 @@ type action_model_attribute = {
 type mysql_action = {
     names: string | string[];
     model: ModelStatic<any>;
+    database: string;
     attributes?: action_model_attribute[];
     fileds?: string[];
     keys?: string[];

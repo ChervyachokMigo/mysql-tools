@@ -39,12 +39,14 @@ const node_fs_1 = require("node:fs");
 const path = __importStar(require("node:path"));
 const tools_1 = require("../misc/tools");
 const save_csv = (csv_params, values = [], print_frequerency = 10) => {
+    var _a;
     const { folder_path = '', tablename, string_quotes = '"', separator = ';' } = csv_params;
     (0, tools_1.folder_prepare)(folder_path);
     if (values && Array.isArray(values) && values.length > 0) {
         console.log('preparing data');
+        const database_name = (_a = (0, defines_1.find_model)(Array.isArray(tablename) ? tablename[0] : tablename)) === null || _a === void 0 ? void 0 : _a.database;
         const now = new Date();
-        const filename = `${tablename}-${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}-` +
+        const filename = `${database_name}-${tablename}-${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}-` +
             `${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
         const header = Object.keys(values[0]).map(x => `"${x}"`).join(separator);
         const types = (0, defines_1.get_attributes_types)(tablename).join(separator);
