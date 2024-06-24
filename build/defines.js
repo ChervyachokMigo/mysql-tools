@@ -147,7 +147,7 @@ const define_model = (connection, names, fields, options) => {
         console.log('not found model', model_name);
     }
     const model = connection.define(model_name, fields, options);
-    (0, exports.add_model_names)({ names, model, database: connection.getDatabaseName() });
+    (0, exports.add_model_names)({ names: names_lowcase, model, database: connection.getDatabaseName() });
     return model;
 };
 exports.define_model = define_model;

@@ -81,7 +81,7 @@ const save_csv = (csv_params, values = [], print_frequerency = 2) => {
 const export_table_csv = (csv_params) => __awaiter(void 0, void 0, void 0, function* () {
     const { tablename = null } = csv_params;
     const action = Array.isArray(tablename) ? tablename[0] : tablename;
-    if (!action || typeof (0, defines_1.find_model)(action) === 'undefined') {
+    if (!action || (0, defines_1.find_model)(action)) {
         console.error('tablename invalid', action);
         return {
             error: 'tablename invalid',
