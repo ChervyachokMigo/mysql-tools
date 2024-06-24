@@ -71,17 +71,11 @@ export const export_table_csv = async ( csv_params: CSV_PARAMS ) => {
 		const action = Array.isArray(tablename) ? tablename[0] : tablename;
 
 		if (!action || !find_model(action)) {
-
-			console.error('tablename invalid');
-			console.error('action', action);
-			console.error('tablename', tablename)
 			return { 
 				error: 'tablename invalid', 
 				action 
 			};
 		}
-
-
 
 		console.log('geting all data from', action);
 		const values = await MYSQL_GET_ALL({ action });

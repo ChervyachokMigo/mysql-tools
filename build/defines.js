@@ -116,10 +116,7 @@ const prepareEND = (...args_2) => __awaiter(void 0, [...args_2], void 0, functio
 exports.prepareEND = prepareEND;
 const get_connection = (DB_NAME) => sequelize_connections.find(x => x.name === DB_NAME);
 exports.get_connection = get_connection;
-const add_model_names = (action) => {
-    console.log('add_model_names', action);
-    mysql_actions.push(action);
-};
+const add_model_names = (action) => mysql_actions.push(action);
 exports.add_model_names = add_model_names;
 const define_model = (connection, names, fields, options) => {
     const names_lowcase = Array.isArray(names) ? names.map(x => x.toLocaleLowerCase()) : names.toLocaleLowerCase();
@@ -143,11 +140,7 @@ const define_model = (connection, names, fields, options) => {
         }
     });
     if (founded_model) {
-        console.log('found model', model_name);
         return founded_model.model;
-    }
-    else {
-        console.log('not found model', model_name);
     }
     const model = connection.define(model_name, fields, options);
     (0, exports.add_model_names)({ names: names_lowcase, model, database: connection.getDatabaseName() });
@@ -167,7 +160,7 @@ const find_model = (name) => {
         }
     });
     if (!MysqlModel) {
-        console.error('[База данных]', '(select_mysql_model)', `undefined action: ${name_lowcase}`);
+        console.error('[База данных]', '(find_model)', `undefined model: ${name_lowcase}`);
         throw new Error(`unknown mysql model: ${name_lowcase}`);
     }
     return MysqlModel;
