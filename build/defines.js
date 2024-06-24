@@ -119,22 +119,23 @@ exports.get_connection = get_connection;
 const add_model_names = (action) => mysql_actions.push(action);
 exports.add_model_names = add_model_names;
 const define_model = (connection, names, fields, options) => {
-    const model_name = Array.isArray(names) ? names[0] : names;
+    const names_lowcase = Array.isArray(names) ? names.map(x => x.toLocaleLowerCase()) : names.toLocaleLowerCase();
+    const model_name = Array.isArray(names_lowcase) ? names_lowcase[0] : names_lowcase;
     const founded_model = mysql_actions.find(x => {
         if (Array.isArray(x.names)) {
-            if (Array.isArray(names)) {
-                return x.names.findIndex(y => names.findIndex(z => z === y) > -1) > -1;
+            if (Array.isArray(names_lowcase)) {
+                return x.names.findIndex(y => names_lowcase.findIndex(z => z === y) > -1) > -1;
             }
             else {
-                return x.names.findIndex(y => names.indexOf(y) > -1) > -1;
+                return x.names.findIndex(y => names_lowcase.indexOf(y) > -1) > -1;
             }
         }
         else {
-            if (Array.isArray(names)) {
-                return names.findIndex(y => y === x.names) > -1;
+            if (Array.isArray(names_lowcase)) {
+                return names_lowcase.findIndex(y => y === x.names) > -1;
             }
             else {
-                return x.names === names;
+                return x.names === names_lowcase;
             }
         }
     });
@@ -152,25 +153,27 @@ const define_model = (connection, names, fields, options) => {
 exports.define_model = define_model;
 const get_models_names = () => mysql_actions.map(x => x.names);
 exports.get_models_names = get_models_names;
-const find_model = (name) => mysql_actions.find(x => x.names === name);
+const find_model = (name) => mysql_actions.find(x => x.names === name.toLocaleLowerCase());
 exports.find_model = find_model;
 const get_attributes_types = (name) => (0, exports.find_model)(name).attributes.map(x => x.attribute.type);
 exports.get_attributes_types = get_attributes_types;
 const select_mysql_model = (action) => {
+    if (!action) {
+        console.error('[База данных]', '(select_mysql_model)', `empty action: ${action}`);
+        throw new Error(`unknown mysql model: ${action}`);
+    }
+    const name_lowcase = action.toLocaleLowerCase();
     const MysqlModel = mysql_actions.find(model => {
-        if (typeof model.names === 'string') {
-            return model.names === action;
-        }
-        else if (typeof model.names === 'object') {
-            return model.names.findIndex(val => val === action) > -1;
+        if (Array.isArray(model.names)) {
+            return model.names.findIndex(val => val === name_lowcase) > -1;
         }
         else {
-            return false;
+            return model.names === name_lowcase;
         }
     });
-    if (!MysqlModel || !action) {
-        console.error('[База данных]', '(select_mysql_model)', `undefined action: ${action}`);
-        throw new Error(`unknown mysql model: ${action}`);
+    if (!MysqlModel) {
+        console.error('[База данных]', '(select_mysql_model)', `undefined action: ${name_lowcase}`);
+        throw new Error(`unknown mysql model: ${name_lowcase}`);
     }
     return MysqlModel.model;
 };

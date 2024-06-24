@@ -150,20 +150,22 @@ export const add_model_names = (action: mysql_action) => mysql_actions.push(acti
 
 export const define_model = (connection: Sequelize, names: string | string[], fields?: ModelAttributes<any>, options?: ModelOptions<any> ) => {
 	
-	const model_name = Array.isArray(names) ? names[0] : names;
+	const names_lowcase =  Array.isArray(names) ? names.map( x => x.toLocaleLowerCase()) : names.toLocaleLowerCase();
+
+	const model_name = Array.isArray(names_lowcase) ? names_lowcase[0] : names_lowcase;
 	
 	const founded_model = mysql_actions.find( x => {
 		if (Array.isArray(x.names)){
-			if (Array.isArray(names)){
-				return x.names.findIndex( y => names.findIndex( z => z === y) > -1) > -1;
+			if (Array.isArray(names_lowcase)){
+				return x.names.findIndex( y => names_lowcase.findIndex( z => z === y) > -1) > -1;
 			} else {
-				return x.names.findIndex( y => names.indexOf(y) > -1) > -1;
+				return x.names.findIndex( y => names_lowcase.indexOf(y) > -1) > -1;
 			}
 		} else {
-			if (Array.isArray(names)){
-				return names.findIndex( y => y === x.names ) > -1
+			if (Array.isArray(names_lowcase)){
+				return names_lowcase.findIndex( y => y === x.names ) > -1
 			} else {
-				return x.names === names
+				return x.names === names_lowcase
 			}
 		}
 	});
@@ -184,25 +186,30 @@ export const define_model = (connection: Sequelize, names: string | string[], fi
 
 export const get_models_names = () => mysql_actions.map( x => x.names );
 
-export const find_model = (name: string) => mysql_actions.find( x => x.names === name);
+export const find_model = (name: string) => mysql_actions.find( x => x.names === name.toLocaleLowerCase());
 
 export const get_attributes_types = (name: string) => ((find_model(name) as mysql_action).attributes as action_model_attribute[]).map( x => x.attribute.type);
 
 export const select_mysql_model = (action: string | null): ModelStatic => {
 
+	if (!action) {
+		console.error('[База данных]', '(select_mysql_model)', `empty action: ${action}`);
+		throw new Error(`unknown mysql model: ${action}`);
+	}
+
+	const name_lowcase = (action as string).toLocaleLowerCase();
+
 	const MysqlModel = mysql_actions.find ( model => {
-		if (typeof model.names === 'string'){
-			return model.names === action;
-		} else if (typeof model.names === 'object') {
-			return model.names.findIndex( val => val === action) > -1;
+		if (Array.isArray(model.names)){
+			return model.names.findIndex( val => val === name_lowcase) > -1;
 		} else {
-			return false;
+			return model.names === name_lowcase;
 		}
 	});
 
-	if ( !MysqlModel || !action ){
-		console.error('[База данных]', '(select_mysql_model)', `undefined action: ${action}`);
-		throw new Error(`unknown mysql model: ${action}`);
+	if ( !MysqlModel ){
+		console.error('[База данных]', '(select_mysql_model)', `undefined action: ${name_lowcase}`);
+		throw new Error(`unknown mysql model: ${name_lowcase}`);
 	}
 
 	return MysqlModel.model;
