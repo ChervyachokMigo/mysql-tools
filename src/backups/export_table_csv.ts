@@ -12,7 +12,7 @@ export type CSV_PARAMS = {
     separator: string,
 }
 
-const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_frequerency = 10) => {
+const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_frequerency = 2) => {
 
 	const {folder_path = '', tablename, string_quotes = '"', separator = ';'} = csv_params;
 

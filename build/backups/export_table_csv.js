@@ -38,7 +38,7 @@ const defines_1 = require("../defines");
 const node_fs_1 = require("node:fs");
 const path = __importStar(require("node:path"));
 const tools_1 = require("../misc/tools");
-const save_csv = (csv_params, values = [], print_frequerency = 10) => {
+const save_csv = (csv_params, values = [], print_frequerency = 2) => {
     var _a;
     const { folder_path = '', tablename, string_quotes = '"', separator = ';' } = csv_params;
     (0, tools_1.folder_prepare)(folder_path);
