@@ -28,45 +28,28 @@ export const load_csv = ( filepath: string ) => {
 			return [];
 		}
 
-		const data_splitted = data.map( x => {
+		return data.map( x => {
 			const str = x.match( string_reg );
 
 			if (str) {
-				return str.map( y => y.replace( replace_reg , '' ));
+				return str.map( (y, i) => {
+					
+					if (types[i].startsWith('INT') || types[i].startsWith('FLOAT') || types[i].startsWith('TINYINT')) {
+						return Number(y);
+
+					} else if (types[i].startsWith('BIGINT')) {
+						return BigInt(y);
+
+					} else {
+						//if (types[i].startsWith('VARCHAR')
+						return y.replace( replace_reg , '' );
+					}
+					
+				});
 			} else {
 				return null;
 
-		}})
-
-		// parse content
-		return data_splitted.map ( x => {
-			
-			if (x === null){
-				return null;
-			}
-
-			if (x.length !== types.length) {
-				console.error('wrong data length', x);
-				return null;
-			}
-
-			return x.map ( (y, i) => {
-
-				if (types[i].startsWith('INT') || types[i].startsWith('FLOAT') || types[i].startsWith('TINYINT')) {
-					return Number(y);
-
-				} else if (types[i].startsWith('BIGINT')) {
-					return BigInt(y);
-
-				} else {
-					//if (types[i].startsWith('VARCHAR')
-					return y;
-				}
-
-			});
-
-		})
-		.map( x => {
+		}}).map( x => {
 			if (x === null){
                 return null;
             }
