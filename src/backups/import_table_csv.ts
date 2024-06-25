@@ -16,11 +16,8 @@ export const load_csv = ( filepath: string ) => {
 		const data = fs.readFileSync( filepath, { encoding: 'binary' }).toString().split('\r\n');
 
 		const string_quotes = (data.shift() as string).replace('string_quotes:', '');
-
-
-
 		const separator = (data.shift() as string).replace('separator:', '');
-		const header = (data.shift() as string).replace('/"/gui', '').split(separator);
+		const header = (data.shift() as string).replace('/"/g', '').split(separator);
 		const types = (data.shift() as string).split(separator);
 
 		const string_reg = new RegExp( `([0-9.,]+)|${string_quotes}(.*?)${string_quotes}`, 'gui');
