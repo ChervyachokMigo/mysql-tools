@@ -38,9 +38,14 @@ export const load_csv = ( filepath: string ) => {
 		}})
 
 		// parse content
-		return data_splitted.map ( (x) => {
+		return data_splitted.map ( x => {
 			
-			if (x === null || x.length !== types.length){
+			if (x === null){
+				return null;
+			}
+
+			if (x.length !== types.length) {
+				console.error('wrong data length', x);
 				return null;
 			}
 
@@ -59,11 +64,15 @@ export const load_csv = ( filepath: string ) => {
 
 			});
 
+		})
+		.map( x => {
+			if (x === null){
+                return null;
+            }
+
+			return Object.fromEntries( x.map( (y, i) => [header[i], y] ) )
+			
 		}).filter( x => x !== null );
-
-
-		/*return [...content]
-			.map( x => Object.fromEntries( x.map( (y, i) => [header[i], y] ) ));*/
 
 	} catch (e: any){
 		throw new Error(e);

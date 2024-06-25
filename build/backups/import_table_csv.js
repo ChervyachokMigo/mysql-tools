@@ -30,8 +30,12 @@ const load_csv = (filepath) => {
             }
         });
         // parse content
-        return data_splitted.map((x) => {
-            if (x === null || x.length !== types.length) {
+        return data_splitted.map(x => {
+            if (x === null) {
+                return null;
+            }
+            if (x.length !== types.length) {
+                console.error('wrong data length', x);
                 return null;
             }
             return x.map((y, i) => {
@@ -46,9 +50,13 @@ const load_csv = (filepath) => {
                     return y;
                 }
             });
+        })
+            .map(x => {
+            if (x === null) {
+                return null;
+            }
+            return Object.fromEntries(x.map((y, i) => [header[i], y]));
         }).filter(x => x !== null);
-        /*return [...content]
-            .map( x => Object.fromEntries( x.map( (y, i) => [header[i], y] ) ));*/
     }
     catch (e) {
         throw new Error(e);
