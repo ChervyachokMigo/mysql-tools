@@ -78,23 +78,18 @@ export const load_csv = ( filepath: string ) => {
 		throw new Error(e);
 	}
 }
-/*
-export const import_table_csv = async ( filepath: string, tablename, chunk_size = 500 ) => {
-		if (! await prepareDB()) {	
-			console.error('prepareDB failed');
-			return false;
-		}
 
-		const content_objects = load_csv({ filepath });
+export const import_table_csv = async ( filepath: string, tablename: string, chunk_size = 500 ) => {
 
-		const chunks = split_array_on_chunks( content_objects, chunk_size);
+	const content_objects = load_csv( filepath );
 
-		let count = 0;
+	const chunks = split_array_on_chunks( content_objects, chunk_size);
 
-		for (let chunk of chunks){
-			count += chunk.length;
-			await MYSQL_SAVE(tablename, chunk);
-		}
-		
-	},
-}*/
+	let count = 0;
+
+	for (let chunk of chunks){
+		count += chunk.length;
+		await MYSQL_SAVE(tablename, chunk);
+	}
+	
+}

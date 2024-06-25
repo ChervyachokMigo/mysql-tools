@@ -1,10 +1,21 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.load_csv = void 0;
+exports.import_table_csv = exports.load_csv = void 0;
+const tools_1 = require("../misc/tools");
 const fs_1 = __importDefault(require("fs"));
+const base_1 = require("../base");
 const load_csv = (filepath) => {
     if (!fs_1.default.existsSync(filepath)) {
         throw new Error('no csv file at ' + filepath);
@@ -63,23 +74,13 @@ const load_csv = (filepath) => {
     }
 };
 exports.load_csv = load_csv;
-/*
-export const import_table_csv = async ( filepath: string, tablename, chunk_size = 500 ) => {
-        if (! await prepareDB()) {
-            console.error('prepareDB failed');
-            return false;
-        }
-
-        const content_objects = load_csv({ filepath });
-
-        const chunks = split_array_on_chunks( content_objects, chunk_size);
-
-        let count = 0;
-
-        for (let chunk of chunks){
-            count += chunk.length;
-            await MYSQL_SAVE(tablename, chunk);
-        }
-        
-    },
-}*/ 
+const import_table_csv = (filepath_1, tablename_1, ...args_1) => __awaiter(void 0, [filepath_1, tablename_1, ...args_1], void 0, function* (filepath, tablename, chunk_size = 500) {
+    const content_objects = (0, exports.load_csv)(filepath);
+    const chunks = (0, tools_1.split_array_on_chunks)(content_objects, chunk_size);
+    let count = 0;
+    for (let chunk of chunks) {
+        count += chunk.length;
+        yield (0, base_1.MYSQL_SAVE)(tablename, chunk);
+    }
+});
+exports.import_table_csv = import_table_csv;
