@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.export_table_csv = void 0;
+exports.export_table_csv = exports.save_csv = void 0;
 const base_1 = require("../base");
 const defines_1 = require("../defines");
 const node_fs_1 = require("node:fs");
@@ -79,6 +79,7 @@ const save_csv = (csv_params, values = [], print_frequerency = 0) => {
         console.error('save_csv > no values');
     }
 };
+exports.save_csv = save_csv;
 const export_table_csv = (csv_params) => __awaiter(void 0, void 0, void 0, function* () {
     const { tablename = null } = csv_params;
     const action = Array.isArray(tablename) ? tablename[0] : tablename;
@@ -91,7 +92,7 @@ const export_table_csv = (csv_params) => __awaiter(void 0, void 0, void 0, funct
     console.log('geting data from', action);
     const values = yield (0, base_1.MYSQL_GET_ALL)({ action });
     //console.log('recived', values.length, 'rows');
-    save_csv(csv_params, values);
+    (0, exports.save_csv)(csv_params, values);
     return {
         success: values.length,
         action
