@@ -3,6 +3,7 @@ import { split_array_on_chunks } from "../misc/tools";
 import fs from "fs";
 
 import { MYSQL_SAVE } from "../base";
+import { find_model } from "../defines";
 
 
 export const load_csv = ( filepath: string ) => {
@@ -81,6 +82,15 @@ export const load_csv = ( filepath: string ) => {
 
 export const import_table_csv = async ( filepath: string, tablename: string, chunk_size = 500 ) => {
 
+	if (!tablename || !find_model(tablename)) {
+		return { 
+			error: 'tablename invalid', 
+			action: tablename 
+		};
+	}
+
+	console.log('importing', tablename);
+
 	const content_objects = load_csv( filepath );
 
 	const chunks = split_array_on_chunks( content_objects, chunk_size);
@@ -91,5 +101,10 @@ export const import_table_csv = async ( filepath: string, tablename: string, chu
 		count += chunk.length;
 		await MYSQL_SAVE(tablename, chunk);
 	}
+
+	return { 
+		success: true,
+		action: tablename
+	};
 	
 }

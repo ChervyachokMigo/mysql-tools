@@ -16,6 +16,7 @@ exports.import_table_csv = exports.load_csv = void 0;
 const tools_1 = require("../misc/tools");
 const fs_1 = __importDefault(require("fs"));
 const base_1 = require("../base");
+const defines_1 = require("../defines");
 const load_csv = (filepath) => {
     if (!fs_1.default.existsSync(filepath)) {
         throw new Error('no csv file at ' + filepath);
@@ -75,6 +76,13 @@ const load_csv = (filepath) => {
 };
 exports.load_csv = load_csv;
 const import_table_csv = (filepath_1, tablename_1, ...args_1) => __awaiter(void 0, [filepath_1, tablename_1, ...args_1], void 0, function* (filepath, tablename, chunk_size = 500) {
+    if (!tablename || !(0, defines_1.find_model)(tablename)) {
+        return {
+            error: 'tablename invalid',
+            action: tablename
+        };
+    }
+    console.log('importing', tablename);
     const content_objects = (0, exports.load_csv)(filepath);
     const chunks = (0, tools_1.split_array_on_chunks)(content_objects, chunk_size);
     let count = 0;
@@ -82,5 +90,9 @@ const import_table_csv = (filepath_1, tablename_1, ...args_1) => __awaiter(void 
         count += chunk.length;
         yield (0, base_1.MYSQL_SAVE)(tablename, chunk);
     }
+    return {
+        success: true,
+        action: tablename
+    };
 });
 exports.import_table_csv = import_table_csv;
