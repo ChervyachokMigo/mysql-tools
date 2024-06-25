@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.folder_prepare = void 0;
+exports.split_array_on_chunks = exports.folder_prepare = void 0;
 const node_fs_1 = require("node:fs");
 const folder_prepare = (folder_path) => {
     try {
@@ -15,3 +15,18 @@ const folder_prepare = (folder_path) => {
     }
 };
 exports.folder_prepare = folder_prepare;
+const split_array_on_chunks = (arr, len) => {
+    if (typeof len === 'undefined' || len === 0) {
+        return arr;
+    }
+    if (!Array.isArray(arr)) {
+        throw new Error('split_array > array is not the object');
+    }
+    let chunks = [];
+    let i = 0;
+    while (i < arr.length) {
+        chunks.push(arr.slice(i, i += len));
+    }
+    return chunks;
+};
+exports.split_array_on_chunks = split_array_on_chunks;
