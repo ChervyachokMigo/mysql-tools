@@ -35,7 +35,7 @@ const check_connect = (MYSQL_CREDENTIALS) => __awaiter(void 0, void 0, void 0, f
     const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
     try {
         const connection = yield (0, promise_1.createConnection)(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}`);
-        for (let DB_NAME of DATABASES) {
+        for (let DB_NAME of Object.values(DATABASES)) {
             yield connection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;`);
         }
         yield connection.end();
@@ -62,8 +62,8 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
     }
     try {
         const results = [];
-        if (DATABASES && typeof DATABASES.length !== 'undefined' && DATABASES.length > 0) {
-            for (let DB_NAME of DATABASES) {
+        if (DATABASES && typeof Object.values(DATABASES).length !== 'undefined' && Object.values(DATABASES).length > 0) {
+            for (let DB_NAME of Object.values(DATABASES)) {
                 const sequelize_connection = new core_1.Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
                     host: DB_HOST || DEFAULT_HOST,
                     port: DB_PORT || DEFAULT_PORT,

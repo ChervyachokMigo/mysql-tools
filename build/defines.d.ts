@@ -12,12 +12,22 @@ type mysql_action = {
     keys?: string[];
     non_keys?: string[];
 };
+export type DATABASES = {
+    DB_BEATMAPS?: string;
+    DB_TELEGRAM_BOT?: string;
+    DB_DISCORD?: string;
+    DB_TWITCHCHAT?: string;
+    DB_SCORES?: string;
+    DB_WEBSERVER?: string;
+    DB_TESTS?: string;
+    DB_BEATMAPS_OLD?: string;
+};
 export type MYSQL_CREDENTIALS = {
     DB_HOST?: string;
     DB_PORT?: number;
     DB_USER: string;
     DB_PASSWORD: string;
-    DATABASES: string[];
+    DATABASES: DATABASES;
 };
 type sequelize_connection = {
     connection: Sequelize;

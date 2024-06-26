@@ -16,12 +16,23 @@ type mysql_action = {
 	non_keys?: string[]
 }
 
+export type DATABASES = {
+	DB_BEATMAPS?: string,
+	DB_TELEGRAM_BOT?: string,
+	DB_DISCORD?: string,
+	DB_TWITCHCHAT?: string,
+	DB_SCORES?: string,
+	DB_WEBSERVER?: string,
+	DB_TESTS?: string,
+	DB_BEATMAPS_OLD?: string,
+}
+
 export type MYSQL_CREDENTIALS = {
     DB_HOST?: string,
     DB_PORT?: number,
 	DB_USER: string,
     DB_PASSWORD: string,
-    DATABASES: string[],
+    DATABASES: DATABASES,
 }
 
 type sequelize_connection = {
@@ -58,7 +69,7 @@ const check_connect = async (MYSQL_CREDENTIALS: MYSQL_CREDENTIALS) => {
 	try {			
 		const connection = await createConnection(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}`);
 
-		for (let DB_NAME of DATABASES){
+		for (let DB_NAME of Object.values(DATABASES)){
 			await connection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;`);
 		}			
 		await connection.end();
@@ -92,8 +103,8 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 
 	try {
 		const results:Sequelize[] = [];
-		if (DATABASES && typeof DATABASES.length !== 'undefined' && DATABASES.length > 0){
-			for (let DB_NAME of DATABASES){
+		if (DATABASES && typeof Object.values(DATABASES).length !== 'undefined' && Object.values(DATABASES).length > 0){
+			for (let DB_NAME of Object.values(DATABASES)){
 				
 				const sequelize_connection = new Sequelize( DB_NAME, DB_USER, DB_PASSWORD, { 
 					host: DB_HOST || DEFAULT_HOST,  
