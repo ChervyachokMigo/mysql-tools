@@ -1,12 +1,12 @@
 import { createConnection } from 'mysql2/promise';
 import { Sequelize, ModelStatic, ModelAttributes, ModelOptions } from '@sequelize/core';
 
-type action_model_attribute = {
+export type action_model_attribute = {
 	name: string, 
 	attribute: any
 }
 
-type mysql_action = {
+export type mysql_action = {
 	names: string | string[],
     model: ModelStatic<any>,
 	database: string,
@@ -35,7 +35,7 @@ export type MYSQL_CREDENTIALS = {
     DATABASES: DATABASES,
 }
 
-type sequelize_connection = {
+export type sequelize_connection = {
 	connection: Sequelize,
 	name: string
 }
@@ -102,7 +102,7 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 	}
 
 	try {
-		const results:Sequelize[] = [];
+
 		if (DATABASES && typeof Object.values(DATABASES).length !== 'undefined' && Object.values(DATABASES).length > 0){
 			for (let DB_NAME of Object.values(DATABASES)){
 				
@@ -124,11 +124,11 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 					},
 					noTypeValidation: true, 
 				});
-				results.push(sequelize_connection);
+
 				sequelize_connections.push({ connection: sequelize_connection, name: DB_NAME });
 			}
 
-			return results;
+			return sequelize_connections;
 		} else {
 			throw new Error('[База данных] DATABASES не установлены');
 		}

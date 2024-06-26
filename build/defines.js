@@ -61,7 +61,6 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
         throw new Error('Нет доступа к базе');
     }
     try {
-        const results = [];
         if (DATABASES && typeof Object.values(DATABASES).length !== 'undefined' && Object.values(DATABASES).length > 0) {
             for (let DB_NAME of Object.values(DATABASES)) {
                 const sequelize_connection = new core_1.Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
@@ -82,10 +81,9 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
                     },
                     noTypeValidation: true,
                 });
-                results.push(sequelize_connection);
                 sequelize_connections.push({ connection: sequelize_connection, name: DB_NAME });
             }
-            return results;
+            return sequelize_connections;
         }
         else {
             throw new Error('[База данных] DATABASES не установлены');
