@@ -12,7 +12,7 @@ type mysql_action = {
     keys?: string[];
     non_keys?: string[];
 };
-type MYSQL_CREDENTIALS = {
+export type MYSQL_CREDENTIALS = {
     DB_HOST?: string;
     DB_PORT?: number;
     DB_USER: string;
