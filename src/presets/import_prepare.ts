@@ -7,11 +7,10 @@ import { scores_prepare } from "../preparations/scores";
 import { twitchchat_prepare } from "../preparations/twitchchat";
 import { webserver_prepare } from "../preparations/webserver";
 
-export const import_prepare = async ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES }: MYSQL_CREDENTIALS) => {
+export const export_prepare = async ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES }: MYSQL_CREDENTIALS ) => {
 	try {
-		const MYSQL_CREDENTIALS = { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES };
 
-		const connections = await prepareDB(MYSQL_CREDENTIALS);
+		const connections = await prepareDB({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES });
 
 		const beatmaps_connection = 	connections.find( x=> x.name === DATABASES.DB_BEATMAPS 		)?.connection;
 		const telegram_connection = 	connections.find( x=> x.name === DATABASES.DB_TELEGRAM_BOT 	)?.connection;
@@ -20,16 +19,17 @@ export const import_prepare = async ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, D
 		const scores_connection = 		connections.find( x=> x.name === DATABASES.DB_SCORES 		)?.connection;
 		const webserver_connection = 	connections.find( x=> x.name === DATABASES.DB_WEBSERVER 	)?.connection;
 		const tests_connection = 		connections.find( x=> x.name === DATABASES.DB_TESTS 		)?.connection;
-
-		beatmaps_prepare(tests_connection);
-		telegram_prepare(tests_connection, tests_connection);
-		discord_prepare(tests_connection, tests_connection);
-		scores_prepare(tests_connection, tests_connection);
-		twitchchat_prepare(tests_connection, tests_connection, tests_connection);
-		webserver_prepare(tests_connection);
+		
+		beatmaps_prepare(beatmaps_connection);
+		telegram_prepare(telegram_connection, beatmaps_connection);
+		discord_prepare(discord_connection, twitchchat_connection);
+		scores_prepare(scores_connection, beatmaps_connection);
+		twitchchat_prepare(twitchchat_connection, discord_connection, beatmaps_connection);
+		webserver_prepare(webserver_connection);
 
 		await prepareEND();
-	} catch (e: any) {
+
+	} catch (e:any) {
 		console.error(e);
 		throw new Error(e);
 	}
