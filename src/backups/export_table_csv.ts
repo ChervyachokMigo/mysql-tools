@@ -69,7 +69,7 @@ export const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_fr
 
 
 export const export_table_csv = async ( csv_params: CSV_PARAMS ) => {
-	console.log(argv.slice(1))
+	console.log(argv.slice(0))
 	return '';
 	/*const {tablename = null} = csv_params;
 

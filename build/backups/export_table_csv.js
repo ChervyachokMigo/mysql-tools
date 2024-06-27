@@ -82,7 +82,7 @@ const save_csv = (csv_params, values = [], print_frequerency = 0) => {
 };
 exports.save_csv = save_csv;
 const export_table_csv = (csv_params) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(node_process_1.argv.slice(1));
+    console.log(node_process_1.argv.slice(0));
     return '';
     /*const {tablename = null} = csv_params;
 
