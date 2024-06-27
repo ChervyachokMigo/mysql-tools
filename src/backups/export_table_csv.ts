@@ -4,6 +4,7 @@ import { find_model, get_attributes_types, prepareDB, select_mysql_model } from 
 import { writeFileSync } from 'node:fs';
 import * as path from 'node:path';
 import { folder_prepare } from "../misc/tools";
+import { argv } from "node:process";
 
 export type CSV_PARAMS = {
 	folder_path: string,
@@ -68,27 +69,28 @@ export const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_fr
 
 
 export const export_table_csv = async ( csv_params: CSV_PARAMS ) => {
+	console.log(argv.slice(1))
+	return '';
+	/*const {tablename = null} = csv_params;
 
-		const {tablename = null} = csv_params;
+	const action = Array.isArray(tablename) ? tablename[0] : tablename;
 
-		const action = Array.isArray(tablename) ? tablename[0] : tablename;
-
-		if (!action || !find_model(action)) {
-			return { 
-				error: 'tablename invalid', 
-				action 
-			};
-		}
-
-		console.log('geting data from', action);
-		const values = await MYSQL_GET_ALL({ action });
-		//console.log('recived', values.length, 'rows');
-
-		save_csv(csv_params, values);
-
+	if (!action || !find_model(action)) {
 		return { 
-            success: values.length,
-            action 
-        };
+			error: 'tablename invalid', 
+			action 
+		};
 	}
+
+	console.log('geting data from', action);
+	const values = await MYSQL_GET_ALL({ action });
+	//console.log('recived', values.length, 'rows');
+
+	save_csv(csv_params, values);
+
+	return { 
+		success: values.length,
+		action 
+	};*/
+}
 
