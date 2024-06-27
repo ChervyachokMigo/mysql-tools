@@ -33,11 +33,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.export_table_csv = exports.save_csv = void 0;
+const base_1 = require("../base");
 const defines_1 = require("../defines");
 const node_fs_1 = require("node:fs");
 const path = __importStar(require("node:path"));
 const tools_1 = require("../misc/tools");
-const node_process_1 = require("node:process");
 const save_csv = (csv_params, values = [], print_frequerency = 0) => {
     var _a;
     const { folder_path = '', tablename, string_quotes = '"', separator = ';' } = csv_params;
@@ -68,7 +68,7 @@ const save_csv = (csv_params, values = [], print_frequerency = 0) => {
             data.push(Object.values(values[i]).map(x => typeof x === 'string' ? `${string_quotes}${x}${string_quotes}` : x).join(separator));
         }
         try {
-            const csv_path = path.join(__dirname, folder_path, filename + '.csv');
+            const csv_path = path.join(folder_path, filename + '.csv');
             console.log('saving', filename + '.csv');
             (0, node_fs_1.writeFileSync)(csv_path, data.join('\r\n'), { encoding: 'utf8' });
         }
@@ -82,28 +82,21 @@ const save_csv = (csv_params, values = [], print_frequerency = 0) => {
 };
 exports.save_csv = save_csv;
 const export_table_csv = (csv_params) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(node_process_1.argv.slice(0));
-    return '';
-    /*const {tablename = null} = csv_params;
-
+    const { tablename = null } = csv_params;
     const action = Array.isArray(tablename) ? tablename[0] : tablename;
-
-    if (!action || !find_model(action)) {
+    if (!action || !(0, defines_1.find_model)(action)) {
         return {
             error: 'tablename invalid',
             action
         };
     }
-
     console.log('geting data from', action);
-    const values = await MYSQL_GET_ALL({ action });
+    const values = yield (0, base_1.MYSQL_GET_ALL)({ action });
     //console.log('recived', values.length, 'rows');
-
-    save_csv(csv_params, values);
-
+    (0, exports.save_csv)(csv_params, values);
     return {
         success: values.length,
         action
-    };*/
+    };
 });
 exports.export_table_csv = export_table_csv;

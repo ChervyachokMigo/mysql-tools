@@ -53,7 +53,7 @@ export const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_fr
 
 		try {
 
-			const csv_path = path.join( __dirname, folder_path, filename + '.csv' );
+			const csv_path = path.join( folder_path, filename + '.csv' );
 
 			console.log('saving', filename + '.csv');
 
@@ -69,9 +69,8 @@ export const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_fr
 
 
 export const export_table_csv = async ( csv_params: CSV_PARAMS ) => {
-	console.log(argv.slice(0))
-	return '';
-	/*const {tablename = null} = csv_params;
+
+	const {tablename = null} = csv_params;
 
 	const action = Array.isArray(tablename) ? tablename[0] : tablename;
 
@@ -91,6 +90,6 @@ export const export_table_csv = async ( csv_params: CSV_PARAMS ) => {
 	return { 
 		success: values.length,
 		action 
-	};*/
+	};
 }
 
