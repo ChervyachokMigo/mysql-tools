@@ -68,8 +68,9 @@ const save_csv = (csv_params, values = [], print_frequerency = 0) => {
             data.push(Object.values(values[i]).map(x => typeof x === 'string' ? `${string_quotes}${x}${string_quotes}` : x).join(separator));
         }
         try {
+            const csv_path = path.join(__dirname, folder_path, filename + '.csv');
             console.log('saving', filename + '.csv');
-            (0, node_fs_1.writeFileSync)(path.join(folder_path, filename + '.csv'), data.join('\r\n'), { encoding: 'utf8' });
+            (0, node_fs_1.writeFileSync)(csv_path, data.join('\r\n'), { encoding: 'utf8' });
         }
         catch (e) {
             console.error(e);

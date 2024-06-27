@@ -51,9 +51,12 @@ export const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_fr
 		}
 
 		try {
+
+			const csv_path = path.join( __dirname, folder_path, filename + '.csv' );
+
 			console.log('saving', filename + '.csv');
 
-			writeFileSync(path.join( folder_path, filename + '.csv' ), data.join('\r\n'), { encoding: 'utf8' });
+			writeFileSync(csv_path, data.join('\r\n'), { encoding: 'utf8' });
 
 		} catch (e) {
 			console.error(e);
