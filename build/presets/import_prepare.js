@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.export_prepare = void 0;
+exports.import_prepare = void 0;
 const defines_1 = require("../defines");
 const beatmaps_1 = require("../preparations/beatmaps");
 const telegram_1 = require("../preparations/telegram");
@@ -17,7 +17,7 @@ const discord_1 = require("../preparations/discord");
 const scores_1 = require("../preparations/scores");
 const twitchchat_1 = require("../preparations/twitchchat");
 const webserver_1 = require("../preparations/webserver");
-const export_prepare = (_a) => __awaiter(void 0, [_a], void 0, function* ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES }) {
+const import_prepare = (_a) => __awaiter(void 0, [_a], void 0, function* ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES }) {
     var _b, _c, _d, _e, _f, _g, _h;
     try {
         const connections = yield (0, defines_1.prepareDB)({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES });
@@ -42,4 +42,4 @@ const export_prepare = (_a) => __awaiter(void 0, [_a], void 0, function* ({ DB_H
     }
     return true;
 });
-exports.export_prepare = export_prepare;
+exports.import_prepare = import_prepare;

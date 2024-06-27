@@ -7,7 +7,7 @@ import { scores_prepare } from "../preparations/scores";
 import { twitchchat_prepare } from "../preparations/twitchchat";
 import { webserver_prepare } from "../preparations/webserver";
 
-export const export_prepare = async ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES }: MYSQL_CREDENTIALS ) => {
+export const import_prepare = async ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES }: MYSQL_CREDENTIALS ) => {
 	try {
 
 		const connections = await prepareDB({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES });
