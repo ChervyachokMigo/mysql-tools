@@ -8,8 +8,8 @@ import { folder_prepare } from "../misc/tools";
 export type CSV_PARAMS = {
 	folder_path: string,
     tablename: string,
-    string_quotes: string,
-    separator: string,
+    string_quotes?: string,
+    separator?: string,
 }
 
 export const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_frequerency = 0) => {
