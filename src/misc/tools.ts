@@ -21,7 +21,7 @@ export const split_array_on_chunks = ( arr: any[], len?: number ) => {
 		throw new Error('split_array > array is not the object');
 	}
 
-	let chunks = [];
+	let chunks: any[] = [];
 	let i = 0;
 
 	while (i < arr.length) {

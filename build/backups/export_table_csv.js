@@ -49,7 +49,7 @@ const save_csv = (csv_params, values = [], print_frequerency = 0) => {
             `${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
         const header = Object.keys(values[0]).map(x => `"${x}"`).join(separator);
         const types = (0, defines_1.get_attributes_types)(tablename).join(separator);
-        let data = [];
+        const data = [];
         data.push('string_quotes:' + string_quotes);
         data.push('separator:' + separator);
         data.push(header);

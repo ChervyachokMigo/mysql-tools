@@ -44,7 +44,7 @@ const MYSQL_GET_ALL = (PARAMS) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.MYSQL_GET_ALL = MYSQL_GET_ALL;
-const MYSQL_UPDATE = (...args_2) => __awaiter(void 0, [...args_2], void 0, function* (action = null, condition = {}, values = {}) {
+const MYSQL_UPDATE = (...args_1) => __awaiter(void 0, [...args_1], void 0, function* (action = null, condition = {}, values = {}) {
     const MysqlModel = (0, defines_1.select_mysql_model)(action);
     if (!condition || Object.keys(values).length == 0) {
         throw new Error(`DB: (mysql update) undefined condition`);
@@ -65,7 +65,7 @@ const MYSQL_UPDATE = (...args_2) => __awaiter(void 0, [...args_2], void 0, funct
     }
 });
 exports.MYSQL_UPDATE = MYSQL_UPDATE;
-const MYSQL_DELETE = (...args_3) => __awaiter(void 0, [...args_3], void 0, function* (action = null, condition = {}) {
+const MYSQL_DELETE = (...args_1) => __awaiter(void 0, [...args_1], void 0, function* (action = null, condition = {}) {
     const MysqlModel = (0, defines_1.select_mysql_model)(action);
     if (!condition) {
         throw new Error(`DB: (mysql delete) нет условия`);
@@ -88,7 +88,7 @@ const MYSQL_DELETE = (...args_3) => __awaiter(void 0, [...args_3], void 0, funct
     }
 });
 exports.MYSQL_DELETE = MYSQL_DELETE;
-const MYSQL_SAVE = (...args_4) => __awaiter(void 0, [...args_4], void 0, function* (action = null, values, ignore_duplicates = true) {
+const MYSQL_SAVE = (...args_1) => __awaiter(void 0, [...args_1], void 0, function* (action = null, values, ignore_duplicates = true) {
     const MysqlModel = (0, defines_1.select_mysql_model)(action);
     try {
         if (typeof values.length !== 'undefined' && values.length > 0) {

@@ -27,7 +27,8 @@ export const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_fr
 		const header = Object.keys(values[0]).map( x => `"${x}"` ).join(separator);
 		const types = get_attributes_types(tablename as string).join(separator);
 
-		let data = [];
+		const data: any[] = [];
+
 		data.push( 'string_quotes:' + string_quotes );
 		data.push( 'separator:' + separator );
 		data.push( header );

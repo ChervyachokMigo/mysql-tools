@@ -99,7 +99,7 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
     }
 });
 exports.prepareDB = prepareDB;
-const prepareEND = (...args_2) => __awaiter(void 0, [...args_2], void 0, function* (logging = false, alter = false) {
+const prepareEND = (...args_1) => __awaiter(void 0, [...args_1], void 0, function* (logging = false, alter = false) {
     for (let sequelize_connection of sequelize_connections) {
         yield sequelize_connection.connection.sync({ logging, alter });
     }
