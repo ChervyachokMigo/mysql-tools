@@ -17,7 +17,7 @@ export const MYSQL_GET_ONE = async (action: string | null = null, condition: Whe
 	}
 }
 
-type GET_ALL_PARAMS = {
+export type GET_ALL_PARAMS = {
 	action: string | null;
 	params?: WhereOptions;
 	attributes?: FindAttributeOptions;
