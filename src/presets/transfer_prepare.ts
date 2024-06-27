@@ -22,7 +22,6 @@ export const transfer_prepare = async ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD,
 		const scores_connection = 		connections.find( x=> x.name === DATABASES.DB_SCORES 		)?.connection;
 		const webserver_connection = 	connections.find( x=> x.name === DATABASES.DB_WEBSERVER 	)?.connection;
 		const tests_connection = 		connections.find( x=> x.name === DATABASES.DB_TESTS 		)?.connection;
-		const beatmaps_old_connection = connections.find( x=> x.name === DATABASES.DB_BEATMAPS_OLD 	)?.connection;
 
 		beatmaps_prepare(beatmaps_connection);
 		/*telegram_prepare(telegram_connection, beatmaps_connection);

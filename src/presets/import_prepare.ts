@@ -20,7 +20,6 @@ export const import_prepare = async ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, D
 		const scores_connection = 		connections.find( x=> x.name === DATABASES.DB_SCORES 		)?.connection;
 		const webserver_connection = 	connections.find( x=> x.name === DATABASES.DB_WEBSERVER 	)?.connection;
 		const tests_connection = 		connections.find( x=> x.name === DATABASES.DB_TESTS 		)?.connection;
-		const beatmaps_old_connection = connections.find( x=> x.name === DATABASES.DB_BEATMAPS_OLD 	)?.connection;
 
 		beatmaps_prepare(tests_connection);
 		telegram_prepare(tests_connection, tests_connection);

@@ -18,7 +18,7 @@ const scores_1 = require("../preparations/scores");
 const twitchchat_1 = require("../preparations/twitchchat");
 const webserver_1 = require("../preparations/webserver");
 const import_prepare = (_a) => __awaiter(void 0, [_a], void 0, function* ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES }) {
-    var _b, _c, _d, _e, _f, _g, _h, _j;
+    var _b, _c, _d, _e, _f, _g, _h;
     try {
         const MYSQL_CREDENTIALS = { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES };
         const connections = yield (0, defines_1.prepareDB)(MYSQL_CREDENTIALS);
@@ -29,7 +29,6 @@ const import_prepare = (_a) => __awaiter(void 0, [_a], void 0, function* ({ DB_H
         const scores_connection = (_f = connections.find(x => x.name === DATABASES.DB_SCORES)) === null || _f === void 0 ? void 0 : _f.connection;
         const webserver_connection = (_g = connections.find(x => x.name === DATABASES.DB_WEBSERVER)) === null || _g === void 0 ? void 0 : _g.connection;
         const tests_connection = (_h = connections.find(x => x.name === DATABASES.DB_TESTS)) === null || _h === void 0 ? void 0 : _h.connection;
-        const beatmaps_old_connection = (_j = connections.find(x => x.name === DATABASES.DB_BEATMAPS_OLD)) === null || _j === void 0 ? void 0 : _j.connection;
         (0, beatmaps_1.beatmaps_prepare)(tests_connection);
         (0, telegram_1.telegram_prepare)(tests_connection, tests_connection);
         (0, discord_1.discord_prepare)(tests_connection, tests_connection);
