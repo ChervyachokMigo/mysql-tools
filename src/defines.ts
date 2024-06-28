@@ -17,14 +17,7 @@ export type mysql_action = {
 }
 
 export type DATABASES = {
-	DB_BEATMAPS?: string,
-	DB_TELEGRAM_BOT?: string,
-	DB_DISCORD?: string,
-	DB_TWITCHCHAT?: string,
-	DB_SCORES?: string,
-	DB_WEBSERVER?: string,
-	DB_TESTS?: string,
-	DB_BEATMAPS_OLD?: string,
+	[key: string]: string
 }
 
 export type MYSQL_CREDENTIALS = {
