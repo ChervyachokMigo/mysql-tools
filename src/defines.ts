@@ -103,7 +103,7 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 
 	try {
 
-		if (DATABASES && typeof Object.values(DATABASES).length !== 'undefined' && Object.values(DATABASES).length > 0){
+		if (DATABASES && typeof DATABASES === 'object' && Object.values(DATABASES).length > 0){
 			for (let DB_NAME of Object.values(DATABASES)){
 				
 				const sequelize_connection = new Sequelize( DB_NAME, DB_USER, DB_PASSWORD, { 
