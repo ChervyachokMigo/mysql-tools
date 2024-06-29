@@ -40,7 +40,7 @@ const load_csv = (filepath) => {
                         return Number(y);
                     }
                     else if (types[i].startsWith('BIGINT')) {
-                        return BigInt(y);
+                        return BigInt(y.replace(replace_reg, ''));
                     }
                     else {
                         //if (types[i].startsWith('VARCHAR')

@@ -38,7 +38,7 @@ export const load_csv = ( filepath: string ) => {
 						return Number(y);
 
 					} else if (types[i].startsWith('BIGINT')) {
-						return BigInt(y);
+						return BigInt(y.replace( replace_reg , '' ));
 
 					} else {
 						//if (types[i].startsWith('VARCHAR')
