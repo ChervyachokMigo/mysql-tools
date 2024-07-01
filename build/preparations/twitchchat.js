@@ -10,10 +10,9 @@ const twitchchat_sended_notify_1 = require("../models/twitchchat/twitchchat_send
 const command_aliases_1 = require("../models/twitchchat/command_aliases");
 const custom_commands_1 = require("../models/twitchchat/custom_commands");
 const token_1 = require("../models/discord/token");
-const twitchchat_prepare = (twitchchat_connection, discord_connection, beatmap_connection) => {
+const twitchchat_prepare = (twitchchat_connection, discord_connection) => {
     if (typeof twitchchat_connection === 'undefined' ||
-        typeof discord_connection === 'undefined' ||
-        typeof beatmap_connection === 'undefined') {
+        typeof discord_connection === 'undefined') {
         throw new Error('no connection in twitchchat_prepare');
     }
     const model = {

@@ -32,7 +32,7 @@ const import_prepare = (_a) => __awaiter(void 0, [_a], void 0, function* ({ DB_H
         (0, telegram_1.telegram_prepare)(telegram_connection, beatmaps_connection);
         (0, discord_1.discord_prepare)(discord_connection, twitchchat_connection);
         (0, scores_1.scores_prepare)(scores_connection, beatmaps_connection);
-        (0, twitchchat_1.twitchchat_prepare)(twitchchat_connection, discord_connection, beatmaps_connection);
+        (0, twitchchat_1.twitchchat_prepare)(twitchchat_connection, discord_connection);
         (0, webserver_1.webserver_prepare)(webserver_connection);
         yield (0, defines_1.prepareEND)();
     }

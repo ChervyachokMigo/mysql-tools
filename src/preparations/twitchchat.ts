@@ -12,12 +12,10 @@ import { token } from "../models/discord/token";
 
 export const twitchchat_prepare = ( 
 	twitchchat_connection: Sequelize | undefined, 
-	discord_connection: Sequelize | undefined, 
-	beatmap_connection: Sequelize | undefined ) => {
+	discord_connection: Sequelize | undefined ) => {
 
 	if (typeof twitchchat_connection === 'undefined' || 
-		typeof discord_connection === 'undefined' || 
-		typeof beatmap_connection === 'undefined') {
+		typeof discord_connection === 'undefined') {
 		throw new Error('no connection in twitchchat_prepare');
 	}
 

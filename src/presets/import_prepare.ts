@@ -24,7 +24,7 @@ export const import_prepare = async ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, D
 		telegram_prepare(telegram_connection, beatmaps_connection);
 		discord_prepare(discord_connection, twitchchat_connection);
 		scores_prepare(scores_connection, beatmaps_connection);
-		twitchchat_prepare(twitchchat_connection, discord_connection, beatmaps_connection);
+		twitchchat_prepare(twitchchat_connection, discord_connection);
 		webserver_prepare(webserver_connection);
 
 		await prepareEND();
