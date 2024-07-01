@@ -8,11 +8,6 @@ import { twitchchat_ignores } from "../models/twitchchat/twitchchat_ignores";
 import { twitchchat_sended_notify } from "../models/twitchchat/twitchchat_sended_notify";
 import { command_aliases } from "../models/twitchchat/command_aliases";
 import { custom_commands } from "../models/twitchchat/custom_commands";
-import { beatmap_md5 } from "../models/beatmaps/beatmaps_md5";
-import { beatmap_id } from "../models/beatmaps/beatmap_id";
-import { beatmap_info } from "../models/beatmaps/beatmap_info";
-import { beatmap_pp } from "../models/beatmaps/beatmap_pp";
-import { beatmap_star } from "../models/beatmaps/beatmap_star";
 import { token } from "../models/discord/token";
 
 export const twitchchat_prepare = ( 
@@ -35,12 +30,6 @@ export const twitchchat_prepare = (
 		twitchchat_sended_notify: 	twitchchat_sended_notify (twitchchat_connection),
         command_aliases: 			command_aliases 	(twitchchat_connection),
         custom_commands: 			custom_commands 	(twitchchat_connection),
-
-        beatmap_md5: 				beatmap_md5 		(beatmap_connection),
-        beatmap_id: 				beatmap_id 			(beatmap_connection),
-		beatmap_info: 				beatmap_info 		(beatmap_connection),
-        beatmap_pp: 				beatmap_pp 			(beatmap_connection),
-        beatmap_star: 				beatmap_star 		(beatmap_connection),
 		
         token: 						token 				(discord_connection)
 	}
