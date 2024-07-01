@@ -15,7 +15,9 @@ export type CSV_PARAMS = {
 
 export const save_csv = (csv_params: CSV_PARAMS, values: string[] = [], print_frequerency = 0) => {
 
-	const {folder_path = '', tablename, string_quotes = '"', separator = ';'} = csv_params;
+	const default_string_quotes = csv_params.tablename === 'beatmap_info' ? '``' : '"';
+
+	const {folder_path = '', tablename, string_quotes = default_string_quotes, separator = ';'} = csv_params;
 
 	folder_prepare (folder_path);
 
