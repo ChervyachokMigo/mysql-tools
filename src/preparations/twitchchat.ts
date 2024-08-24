@@ -8,6 +8,7 @@ import { twitchchat_ignores } from "../models/twitchchat/twitchchat_ignores";
 import { twitchchat_sended_notify } from "../models/twitchchat/twitchchat_sended_notify";
 import { command_aliases } from "../models/twitchchat/command_aliases";
 import { custom_commands } from "../models/twitchchat/custom_commands";
+import { user_stats } from "../models/twitchchat/user_stats";
 import { token } from "../models/discord/token";
 
 export const twitchchat_prepare = ( 
@@ -28,6 +29,7 @@ export const twitchchat_prepare = (
 		twitchchat_sended_notify: 	twitchchat_sended_notify (twitchchat_connection),
         command_aliases: 			command_aliases 	(twitchchat_connection),
         custom_commands: 			custom_commands 	(twitchchat_connection),
+		user_stats:					user_stats			(twitchchat_connection),
 		
         token: 						token 				(discord_connection)
 	}
