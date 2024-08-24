@@ -4,7 +4,7 @@ import { define_model } from "../../defines";
 export const user_stats = (connection: Sequelize) => {
 
 	const model = define_model(connection, 'user_stats', {
-		userid: {type: DataTypes.STRING, allowNull: false},
+		userid: {type: DataTypes.STRING, allowNull: false, unique: true, primaryKey: true },
 		username: {type: DataTypes.STRING, allowNull: false},
 		usercolor:  {type: DataTypes.STRING, allowNull: false},
 		messagescount: {type: DataTypes.INTEGER, defaultValue: 0},
