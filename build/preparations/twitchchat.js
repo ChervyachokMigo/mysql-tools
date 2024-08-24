@@ -9,6 +9,7 @@ const twitchchat_ignores_1 = require("../models/twitchchat/twitchchat_ignores");
 const twitchchat_sended_notify_1 = require("../models/twitchchat/twitchchat_sended_notify");
 const command_aliases_1 = require("../models/twitchchat/command_aliases");
 const custom_commands_1 = require("../models/twitchchat/custom_commands");
+const user_stats_1 = require("../models/twitchchat/user_stats");
 const token_1 = require("../models/discord/token");
 const twitchchat_prepare = (twitchchat_connection, discord_connection) => {
     if (typeof twitchchat_connection === 'undefined' ||
@@ -24,6 +25,7 @@ const twitchchat_prepare = (twitchchat_connection, discord_connection) => {
         twitchchat_sended_notify: (0, twitchchat_sended_notify_1.twitchchat_sended_notify)(twitchchat_connection),
         command_aliases: (0, command_aliases_1.command_aliases)(twitchchat_connection),
         custom_commands: (0, custom_commands_1.custom_commands)(twitchchat_connection),
+        user_stats: (0, user_stats_1.user_stats)(twitchchat_connection),
         token: (0, token_1.token)(discord_connection)
     };
     model.custom_commands.hasMany(model.command_aliases, { foreignKey: 'command_id', foreignKeyConstraints: false });
