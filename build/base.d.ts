@@ -1,11 +1,10 @@
 import { CreationAttributes, FindAttributeOptions, Literal, Order, UpdateValues, WhereOptions } from "@sequelize/core";
-import { Nullish } from "@sequelize/core/types/utils/types";
 export declare const MYSQL_GET_ONE: (action?: string | null, condition?: WhereOptions) => Promise<any>;
 export type GET_ALL_PARAMS = {
     action: string | null;
     params?: WhereOptions;
     attributes?: FindAttributeOptions;
-    limit?: Nullish<number | Literal>;
+    limit?: null | number | Literal;
     order?: Order;
 };
 export declare const MYSQL_GET_ALL: (PARAMS: GET_ALL_PARAMS) => Promise<any[]>;

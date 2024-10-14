@@ -63,9 +63,10 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
     try {
         if (DATABASES && typeof DATABASES === 'object' && Object.values(DATABASES).length > 0) {
             for (let DB_NAME of Object.values(DATABASES)) {
-                const sequelize_connection = new core_1.Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
-                    host: DB_HOST || DEFAULT_HOST,
-                    port: DB_PORT || DEFAULT_PORT,
+                //DB_NAME, DB_USER, DB_PASSWORD,
+                const url = `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}/${DB_NAME}`;
+                const sequelize_connection = new core_1.Sequelize({
+                    url,
                     dialect: 'mysql',
                     define: {
                         updatedAt: false,

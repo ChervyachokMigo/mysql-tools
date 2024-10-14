@@ -84,7 +84,7 @@ const check_connect = async (MYSQL_CREDENTIALS: MYSQL_CREDENTIALS) => {
 	}
 }
 
-export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging = false ) => {
+export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging: any = false ) => {
 
 	const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
 
@@ -98,10 +98,10 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 
 		if (DATABASES && typeof DATABASES === 'object' && Object.values(DATABASES).length > 0){
 			for (let DB_NAME of Object.values(DATABASES)){
-				
-				const sequelize_connection = new Sequelize( DB_NAME, DB_USER, DB_PASSWORD, { 
-					host: DB_HOST || DEFAULT_HOST,  
-					port: DB_PORT || DEFAULT_PORT,
+				//DB_NAME, DB_USER, DB_PASSWORD,
+				const url = `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}/${DB_NAME}`;
+				const sequelize_connection = new Sequelize({
+					url,
 					dialect: 'mysql',
 					define: {
 						updatedAt: false,
@@ -135,7 +135,7 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 	}
 }
 
-export const prepareEND = async (logging = false, alter = false) => {
+export const prepareEND = async (logging: any = false, alter = false) => {
 	for (let sequelize_connection of sequelize_connections) {
 		await sequelize_connection.connection.sync({ logging, alter });
 	}

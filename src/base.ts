@@ -1,7 +1,7 @@
 
 import { CreationAttributes, FindAttributeOptions, Literal, Order, UpdateValues, UpsertOptions, WhereOptions } from "@sequelize/core";
 import { select_mysql_model } from "./defines";
-import { Nullish } from "@sequelize/core/types/utils/types";
+
 
 export const MYSQL_GET_ONE = async (action: string | null = null, condition: WhereOptions = {} ) => {
 	const MysqlModel = select_mysql_model(action);
@@ -21,7 +21,7 @@ export type GET_ALL_PARAMS = {
 	action: string | null;
 	params?: WhereOptions;
 	attributes?: FindAttributeOptions;
-	limit?: Nullish<number | Literal>;
+	limit?: null | number | Literal;
 	order?: Order
 }
 
