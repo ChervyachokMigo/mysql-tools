@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize";
+import { Sequelize } from "@sequelize/core";
 
 import { sended_map } from "../models/telegram/sended_map";
 import { download_map } from "../models/telegram/download_map";
@@ -23,7 +23,7 @@ export const telegram_prepare = ( telegram_connection: Sequelize | undefined, be
         beatmap_id: 	beatmap_id		(beatmap_connection)
 	}	
 
-	model.tg_file	.hasMany(	model.beatmap_id, { foreignKey: 'beatmapset_id',  foreignKeyConstraint: false});
+	model.tg_file	.hasMany(	model.beatmap_id, { foreignKey: 'beatmapset_id',  foreignKeyConstraints: false});
 	
 	/*const sended_map_db = connection.define ('sended_map', {
 		beatmapset_id: { type: DataTypes.INTEGER },
@@ -46,7 +46,7 @@ export const telegram_prepare = ( telegram_connection: Sequelize | undefined, be
 		message_id: {type: DataTypes.INTEGER, allowNull: true}
 	}, {noPrimaryKey: false});
 
-	tg_file.hasMany(osu_beatmap_id, { foreignKey: 'beatmapset_id',  foreignKeyConstraints: false});
+	tg_file.hasMany(osu_beatmap_id, { foreignKey: 'beatmapset_id',  foreignKeyConstraintss: false});
 	
 	add_model_names({ names: 'tg_file', model: tg_file });
 	

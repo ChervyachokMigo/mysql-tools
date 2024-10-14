@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { Sequelize, DataTypes } from "@sequelize/core";
 import { define_model } from "../../defines";
 
 export const twitchchat_ignores = (connection: Sequelize) => {

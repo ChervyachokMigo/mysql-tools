@@ -1,1 +1,1 @@
-{"version":3,"file":"twitch_user.d.ts","sourceRoot":"","sources":["../../../src/models/discord/twitch_user.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,WAAW,CAAC;AAGjD,eAAO,MAAM,WAAW,eAAgB,SAAS,QAkBhD,CAAA"}
+{"version":3,"file":"twitch_user.d.ts","sourceRoot":"","sources":["../../../src/models/discord/twitch_user.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,WAAW,eAAgB,SAAS,+CAkBhD,CAAA"}

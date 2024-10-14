@@ -1,5 +1,5 @@
 import { createConnection } from 'mysql2/promise';
-import { Sequelize, ModelStatic, ModelAttributes, ModelOptions } from 'sequelize';
+import { Sequelize, ModelAttributes, ModelOptions, Model, ModelStatic } from "@sequelize/core";
 
 export type action_model_attribute = {
 	name: string, 
@@ -45,9 +45,8 @@ const mysql_actions: mysql_action[] = [];
 * @param {Boolean} primary If true get only primary keys, else get only non-primary keys
 * @return {Array} Array of fields of Model
 */
-const get_model_field_list = async (model: ModelStatic<any>, model_list: {all?: boolean, primary?: boolean} ) => {
+const get_model_field_list = async (model: ModelStatic, model_list: {all?: boolean, primary?: boolean} ) => {
 	const {all= false, primary = false} = model_list;
-
 	return await Promise.all(Object.entries(await model.describe())
 		// eslint-disable-next-line no-unused-vars
 		.filter( ([key, value]) => all ? true : primary ? value.primaryKey : !value.primaryKey )
@@ -84,7 +83,9 @@ const check_connect = async (MYSQL_CREDENTIALS: MYSQL_CREDENTIALS) => {
 	}
 }
 
-export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging = false ) => {
+type logging_types = false | ((sql: string, timing?: number | undefined) => void) | undefined;
+
+export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging: logging_types = false ) => {
 
 	const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
 
@@ -95,13 +96,13 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 	}
 
 	try {
+		const url = `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}`
 
 		if (DATABASES && typeof DATABASES === 'object' && Object.values(DATABASES).length > 0){
 			for (let DB_NAME of Object.values(DATABASES)){
 				
-				const sequelize_connection = new Sequelize( DB_NAME, DB_USER, DB_PASSWORD, { 
-					host: DB_HOST || DEFAULT_HOST,  
-					port: DB_PORT || DEFAULT_PORT,
+				const sequelize_connection = new Sequelize({ 
+					url,
 					dialect: 'mysql',
 					define: {
 						updatedAt: false,
@@ -115,7 +116,7 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 						acquire: 60000,
 						idle: 60000
 					},
-					typeValidation: false, 
+					noTypeValidation: true, 
 				});
 
 				sequelize_connections.push({ connection: sequelize_connection, name: DB_NAME });
@@ -135,7 +136,7 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging =
 	}
 }
 
-export const prepareEND = async (logging = false, alter = false) => {
+export const prepareEND = async (logging: logging_types = false, alter = false) => {
 	for (let sequelize_connection of sequelize_connections) {
 		await sequelize_connection.connection.sync({ logging, alter });
 	}
@@ -152,7 +153,7 @@ export const get_connection = (DB_NAME: string) => sequelize_connections.find( x
 
 export const add_model_names = (action: mysql_action) => mysql_actions.push(action);
 
-export const define_model = (connection: Sequelize, names: string | string[], fields?: ModelAttributes<any>, options?: ModelOptions<any> ) => {
+export const define_model = (connection: Sequelize, names: string | string[], fields?: ModelAttributes, options?: ModelOptions ) => {
 	
 	const names_lowcase =  Array.isArray(names) ? names.map( x => x.toLocaleLowerCase()) : names.toLocaleLowerCase();
 
@@ -178,7 +179,7 @@ export const define_model = (connection: Sequelize, names: string | string[], fi
 		return founded_model.model;
 	}
 
-	const model = connection.define(model_name, fields as ModelAttributes<any>, options);
+	const model = connection.define(model_name, fields as ModelAttributes, options);
 
 	add_model_names({ names: names_lowcase, model, database: connection.getDatabaseName() });
 

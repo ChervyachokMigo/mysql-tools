@@ -18,7 +18,7 @@ const scores_1 = require("../preparations/scores");
 const twitchchat_1 = require("../preparations/twitchchat");
 const webserver_1 = require("../preparations/webserver");
 const export_prepare = (_a) => __awaiter(void 0, [_a], void 0, function* ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES }) {
-    var _b, _c, _d, _e, _f, _g, _h;
+    var _b, _c, _d, _e, _f, _g;
     try {
         const connections = yield (0, defines_1.prepareDB)({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES });
         const beatmaps_connection = (_b = connections.find(x => x.name === DATABASES.DB_BEATMAPS)) === null || _b === void 0 ? void 0 : _b.connection;
@@ -27,7 +27,7 @@ const export_prepare = (_a) => __awaiter(void 0, [_a], void 0, function* ({ DB_H
         const twitchchat_connection = (_e = connections.find(x => x.name === DATABASES.DB_TWITCHCHAT)) === null || _e === void 0 ? void 0 : _e.connection;
         const scores_connection = (_f = connections.find(x => x.name === DATABASES.DB_SCORES)) === null || _f === void 0 ? void 0 : _f.connection;
         const webserver_connection = (_g = connections.find(x => x.name === DATABASES.DB_WEBSERVER)) === null || _g === void 0 ? void 0 : _g.connection;
-        const tests_connection = (_h = connections.find(x => x.name === DATABASES.DB_TESTS)) === null || _h === void 0 ? void 0 : _h.connection;
+        //const tests_connection = 		connections.find( x=> x.name === DATABASES.DB_TESTS 		)?.connection;
         (0, beatmaps_1.beatmaps_prepare)(beatmaps_connection);
         (0, telegram_1.telegram_prepare)(telegram_connection, beatmaps_connection);
         (0, discord_1.discord_prepare)(discord_connection, twitchchat_connection);

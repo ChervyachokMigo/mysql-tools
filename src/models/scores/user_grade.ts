@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { Sequelize, DataTypes } from "@sequelize/core";
 import { define_model } from "../../defines";
 
 export const user_grade = (connection: Sequelize) => {
@@ -17,7 +17,7 @@ export const user_grade = (connection: Sequelize) => {
 		X: {type: DataTypes.INTEGER, defaultValue: 0, allowNull: false},
 		SH: {type: DataTypes.INTEGER, defaultValue: 0, allowNull: false},
 		XH: {type: DataTypes.INTEGER, defaultValue: 0, allowNull: false},
-	});
+	}, { noPrimaryKey: false });
 	
 	return model;
 	

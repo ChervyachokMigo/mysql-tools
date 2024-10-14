@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { Sequelize, DataTypes } from "@sequelize/core";
 import { define_model } from "../../defines";
 
 export const score = (connection: Sequelize) => {
@@ -27,7 +27,7 @@ export const score = (connection: Sequelize) => {
 		count_miss: {type: DataTypes.INTEGER, defaultValue:0, allowNull: false},
 		is_fc: {type: DataTypes.BOOLEAN, defaultValue: false, allowNull: false},
 		legacy_is_fc: {type: DataTypes.BOOLEAN, defaultValue: false, allowNull: false},
-	});
+	}, { noPrimaryKey: false });
 	
 	return model;
 	

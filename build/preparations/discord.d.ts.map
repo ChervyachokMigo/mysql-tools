@@ -1,1 +1,1 @@
-{"version":3,"file":"discord.d.ts","sourceRoot":"","sources":["../../src/preparations/discord.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,WAAW,CAAC;AA8BtC,eAAO,MAAM,eAAe,uBAAyB,SAAS,GAAG,SAAS,yBAAyB,SAAS,GAAG,SAAS,SAkCvH,CAAA"}
+{"version":3,"file":"discord.d.ts","sourceRoot":"","sources":["../../src/preparations/discord.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,iBAAiB,CAAC;AA8B5C,eAAO,MAAM,eAAe,uBAAyB,SAAS,GAAG,SAAS,yBAAyB,SAAS,GAAG,SAAS,SAkCvH,CAAA"}

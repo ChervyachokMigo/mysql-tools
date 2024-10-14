@@ -1,5 +1,5 @@
 
-import { CreationAttributes, FindAttributeOptions, Order, WhereOptions } from "sequelize";
+import { CreationAttributes, FindAttributeOptions, Model, Order, WhereOptions } from "@sequelize/core";
 import { select_mysql_model } from "./defines";
 
 
@@ -94,7 +94,7 @@ export const MYSQL_DELETE = async ( action: string | null = null, condition: Whe
 
 export const MYSQL_SAVE = async ( action: string | null = null, values: CreationAttributes<any> | ReadonlyArray<any>, ignore_duplicates = true ) => {
 	const MysqlModel = select_mysql_model(action);
-
+	
 	try {
 		if (typeof values.length !== 'undefined' && values.length > 0){
 			return await MysqlModel.bulkCreate(values as ReadonlyArray<any>, { logging: false, ignoreDuplicates: ignore_duplicates })

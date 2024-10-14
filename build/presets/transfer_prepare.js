@@ -12,6 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.transfer_prepare = void 0;
 const defines_1 = require("../defines");
 const beatmaps_1 = require("../preparations/beatmaps");
+// import { telegram_prepare } from "../preparations/telegram";
+// import { discord_prepare } from "../preparations/discord";
+// import { scores_prepare } from "../preparations/scores";
+// import { twitchchat_prepare } from "../preparations/twitchchat";
+// import { webserver_prepare } from "../preparations/webserver";
 const transfer_prepare = (_a) => __awaiter(void 0, [_a], void 0, function* ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES }) {
     var _b, _c, _d, _e, _f, _g, _h;
     try {

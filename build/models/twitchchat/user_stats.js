@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.user_stats = void 0;
-const sequelize_1 = require("sequelize");
+const core_1 = require("@sequelize/core");
 const defines_1 = require("../../defines");
 const user_stats = (connection) => {
     const model = (0, defines_1.define_model)(connection, 'user_stats', {
-        userid: { type: sequelize_1.DataTypes.STRING, allowNull: false, unique: true, primaryKey: true },
-        username: { type: sequelize_1.DataTypes.STRING, allowNull: false },
-        usercolor: { type: sequelize_1.DataTypes.STRING, allowNull: false },
-        messagescount: { type: sequelize_1.DataTypes.INTEGER, defaultValue: 0 },
-        charscount: { type: sequelize_1.DataTypes.INTEGER, defaultValue: 0 },
-        joinscount: { type: sequelize_1.DataTypes.INTEGER, defaultValue: 0 },
+        userid: { type: core_1.DataTypes.STRING, allowNull: false, unique: true, primaryKey: true },
+        username: { type: core_1.DataTypes.STRING, allowNull: false },
+        usercolor: { type: core_1.DataTypes.STRING, allowNull: false },
+        messagescount: { type: core_1.DataTypes.INTEGER, defaultValue: 0 },
+        charscount: { type: core_1.DataTypes.INTEGER, defaultValue: 0 },
+        joinscount: { type: core_1.DataTypes.INTEGER, defaultValue: 0 },
     });
     return model;
 };

@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mysql2": "^3.10.1",
-    "sequelize": "^7.0.0-alpha.9"
+    "@sequelize/core": "^7.0.0-alpha.37",
+    "mysql2": "^3.10.1"
   },
   "devDependencies": {
     "@types/node": "^20.14.6",

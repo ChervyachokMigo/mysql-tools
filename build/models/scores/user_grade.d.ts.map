@@ -1,1 +1,1 @@
-{"version":3,"file":"user_grade.d.ts","sourceRoot":"","sources":["../../../src/models/scores/user_grade.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,WAAW,CAAC;AAGjD,eAAO,MAAM,UAAU,eAAgB,SAAS,QAoB/C,CAAA"}
+{"version":3,"file":"user_grade.d.ts","sourceRoot":"","sources":["../../../src/models/scores/user_grade.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,UAAU,eAAgB,SAAS,+CAoB/C,CAAA"}

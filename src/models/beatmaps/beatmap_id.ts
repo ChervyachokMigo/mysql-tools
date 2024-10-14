@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { Sequelize, DataTypes } from "@sequelize/core";
 import { define_model } from "../../defines";
 
 export const beatmap_id = (connection: Sequelize) => {
@@ -9,7 +9,7 @@ export const beatmap_id = (connection: Sequelize) => {
 		beatmapset_id: {type: DataTypes.INTEGER, allowNull: false},
 		gamemode: {type: DataTypes.TINYINT.UNSIGNED, allowNull: false},
 		ranked: {type: DataTypes.TINYINT, allowNull: false},
-	});
+	}, {noPrimaryKey: false});
 
 	return model;
 	

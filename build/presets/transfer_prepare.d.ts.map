@@ -1,1 +1,1 @@
-{"version":3,"file":"transfer_prepare.d.ts","sourceRoot":"","sources":["../../src/presets/transfer_prepare.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,iBAAiB,EAAyB,MAAM,YAAY,CAAC;AAUtE,eAAO,MAAM,gBAAgB,0DAAiE,iBAAiB,qBA6B9G,CAAA"}
+{"version":3,"file":"transfer_prepare.d.ts","sourceRoot":"","sources":["../../src/presets/transfer_prepare.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,iBAAiB,EAAyB,MAAM,YAAY,CAAC;AAStE,eAAO,MAAM,gBAAgB,0DAAiE,iBAAiB,qBA6B9G,CAAA"}

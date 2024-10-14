@@ -1,1 +1,1 @@
-{"version":3,"file":"twitchchat_sended_notify.d.ts","sourceRoot":"","sources":["../../../src/models/twitchchat/twitchchat_sended_notify.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,WAAW,CAAC;AAGjD,eAAO,MAAM,wBAAwB,eAAgB,SAAS,QAQ7D,CAAA"}
+{"version":3,"file":"twitchchat_sended_notify.d.ts","sourceRoot":"","sources":["../../../src/models/twitchchat/twitchchat_sended_notify.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,wBAAwB,eAAgB,SAAS,+CAQ7D,CAAA"}

@@ -18,7 +18,7 @@ export const export_prepare = async ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, D
 		const twitchchat_connection = 	connections.find( x=> x.name === DATABASES.DB_TWITCHCHAT 	)?.connection;
 		const scores_connection = 		connections.find( x=> x.name === DATABASES.DB_SCORES 		)?.connection;
 		const webserver_connection = 	connections.find( x=> x.name === DATABASES.DB_WEBSERVER 	)?.connection;
-		const tests_connection = 		connections.find( x=> x.name === DATABASES.DB_TESTS 		)?.connection;
+		//const tests_connection = 		connections.find( x=> x.name === DATABASES.DB_TESTS 		)?.connection;
 		
 		beatmaps_prepare(beatmaps_connection);
 		telegram_prepare(telegram_connection, beatmaps_connection);

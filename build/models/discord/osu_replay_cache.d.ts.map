@@ -1,1 +1,1 @@
-{"version":3,"file":"osu_replay_cache.d.ts","sourceRoot":"","sources":["../../../src/models/discord/osu_replay_cache.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,WAAW,CAAC;AAGjD,eAAO,MAAM,gBAAgB,eAAgB,SAAS,QASrD,CAAA"}
+{"version":3,"file":"osu_replay_cache.d.ts","sourceRoot":"","sources":["../../../src/models/discord/osu_replay_cache.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,gBAAgB,eAAgB,SAAS,+CASrD,CAAA"}

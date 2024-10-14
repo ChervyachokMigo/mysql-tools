@@ -1,1 +1,1 @@
-{"version":3,"file":"mail_ignore_subjects.d.ts","sourceRoot":"","sources":["../../../src/models/webserver/mail_ignore_subjects.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,WAAW,CAAC;AAGjD,eAAO,MAAM,oBAAoB,eAAgB,SAAS,QAQzD,CAAA"}
+{"version":3,"file":"mail_ignore_subjects.d.ts","sourceRoot":"","sources":["../../../src/models/webserver/mail_ignore_subjects.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,oBAAoB,eAAgB,SAAS,+CAQzD,CAAA"}

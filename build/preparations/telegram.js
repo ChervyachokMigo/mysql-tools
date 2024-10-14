@@ -19,7 +19,7 @@ const telegram_prepare = (telegram_connection, beatmap_connection) => {
         tg_file: (0, tg_file_1.tg_file)(beatmap_connection),
         beatmap_id: (0, beatmap_id_1.beatmap_id)(beatmap_connection)
     };
-    model.tg_file.hasMany(model.beatmap_id, { foreignKey: 'beatmapset_id', foreignKeyConstraint: false });
+    model.tg_file.hasMany(model.beatmap_id, { foreignKey: 'beatmapset_id', foreignKeyConstraints: false });
     /*const sended_map_db = connection.define ('sended_map', {
         beatmapset_id: { type: DataTypes.INTEGER },
     });
@@ -41,7 +41,7 @@ const telegram_prepare = (telegram_connection, beatmap_connection) => {
         message_id: {type: DataTypes.INTEGER, allowNull: true}
     }, {noPrimaryKey: false});
 
-    tg_file.hasMany(osu_beatmap_id, { foreignKey: 'beatmapset_id',  foreignKeyConstraints: false});
+    tg_file.hasMany(osu_beatmap_id, { foreignKey: 'beatmapset_id',  foreignKeyConstraintss: false});
     
     add_model_names({ names: 'tg_file', model: tg_file });
     

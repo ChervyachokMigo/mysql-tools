@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { Sequelize, DataTypes } from "@sequelize/core";
 import { define_model } from "../../defines";
 
 export const mail_contents = (connection: Sequelize) => {
@@ -8,9 +8,9 @@ export const mail_contents = (connection: Sequelize) => {
 		addressee: {type: DataTypes.STRING, allowNull: false}, 
 		from: {type: DataTypes.STRING, allowNull: false},
 		subject: {type: DataTypes.STRING, allowNull: false, defaultValue: ''},
-		html: {type: DataTypes.TEXT('long'), allowNull: true },
-		text: {type: DataTypes.TEXT('long'), allowNull: true },
-		textAsHtml: {type: DataTypes.TEXT('long'), allowNull: true },
+		html: {type: DataTypes.TEXT({length: "long"}), allowNull: true },
+		text: {type: DataTypes.TEXT({length: "long"}), allowNull: true },
+		textAsHtml: {type: DataTypes.TEXT({length: "long"}), allowNull: true },
 		date: {type: DataTypes.DATE, allowNull: false},
 		opened: {type: DataTypes.BOOLEAN, defaultValue: false}
 	});

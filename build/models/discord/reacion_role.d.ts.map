@@ -1,1 +1,1 @@
-{"version":3,"file":"reacion_role.d.ts","sourceRoot":"","sources":["../../../src/models/discord/reacion_role.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,WAAW,CAAC;AAGjD,eAAO,MAAM,YAAY,eAAgB,SAAS,QAYjD,CAAA"}
+{"version":3,"file":"reacion_role.d.ts","sourceRoot":"","sources":["../../../src/models/discord/reacion_role.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,YAAY,eAAgB,SAAS,+CAYjD,CAAA"}

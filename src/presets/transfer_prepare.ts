@@ -1,12 +1,11 @@
 import { MYSQL_CREDENTIALS, prepareDB, prepareEND } from "../defines";
 
 import { beatmaps_prepare } from "../preparations/beatmaps";
-import { telegram_prepare } from "../preparations/telegram";
-import { discord_prepare } from "../preparations/discord";
-import { scores_prepare } from "../preparations/scores";
-import { twitchchat_prepare } from "../preparations/twitchchat";
-import { webserver_prepare } from "../preparations/webserver";
-import Sequelize from "sequelize";
+// import { telegram_prepare } from "../preparations/telegram";
+// import { discord_prepare } from "../preparations/discord";
+// import { scores_prepare } from "../preparations/scores";
+// import { twitchchat_prepare } from "../preparations/twitchchat";
+// import { webserver_prepare } from "../preparations/webserver";
 
 export const transfer_prepare = async ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES }: MYSQL_CREDENTIALS) => {
 

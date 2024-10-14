@@ -1,1 +1,1 @@
-{"version":3,"file":"osu_score.d.ts","sourceRoot":"","sources":["../../../src/models/discord/osu_score.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,WAAW,CAAC;AAGjD,eAAO,MAAM,SAAS,eAAgB,SAAS,QAyB9C,CAAA"}
+{"version":3,"file":"osu_score.d.ts","sourceRoot":"","sources":["../../../src/models/discord/osu_score.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,SAAS,eAAgB,SAAS,+CAyB9C,CAAA"}
