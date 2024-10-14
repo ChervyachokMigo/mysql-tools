@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "@sequelize/core";
+import { Sequelize, DataTypes } from "sequelize";
 import { define_model } from "../../defines";
 
 export const saved_control_commands = (connection: Sequelize) => {

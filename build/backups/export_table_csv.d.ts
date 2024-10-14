@@ -10,7 +10,7 @@ export declare const export_table_csv: (csv_params: CSV_PARAMS) => Promise<{
     action: any;
     success?: undefined;
 } | {
-    success: number;
+    success: any;
     action: any;
     error?: undefined;
 }>;

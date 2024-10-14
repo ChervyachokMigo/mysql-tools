@@ -1,3 +1,3 @@
-import { Sequelize } from "@sequelize/core";
-export declare const beatmap_info: (connection: Sequelize) => import("@sequelize/core").ModelStatic<any>;
+import { Sequelize } from "sequelize";
+export declare const beatmap_info: (connection: Sequelize) => any;
 //# sourceMappingURL=beatmap_info.d.ts.map

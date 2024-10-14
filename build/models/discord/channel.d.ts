@@ -1,3 +1,3 @@
-import { Sequelize } from "@sequelize/core";
-export declare const channel: (connection: Sequelize) => import("@sequelize/core").ModelStatic<any>;
+import { Sequelize } from "sequelize";
+export declare const channel: (connection: Sequelize) => any;
 //# sourceMappingURL=channel.d.ts.map

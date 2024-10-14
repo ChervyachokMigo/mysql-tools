@@ -1,3 +1,3 @@
-import { Sequelize } from "@sequelize/core";
-export declare const score: (connection: Sequelize) => import("@sequelize/core").ModelStatic<any>;
+import { Sequelize } from "sequelize";
+export declare const score: (connection: Sequelize) => any;
 //# sourceMappingURL=score.d.ts.map

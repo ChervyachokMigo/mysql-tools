@@ -1,4 +1,4 @@
-import { Sequelize } from "@sequelize/core";
+import { Sequelize } from "sequelize";
 
 import { twitchchat } from "../models/twitchchat/twitchchat";
 import { twitch_banned } from "../models/twitchchat/twitch_banned";
@@ -34,6 +34,6 @@ export const twitchchat_prepare = (
         token: 						token 				(discord_connection)
 	}
 
-	model.custom_commands .hasMany(	model.command_aliases, {foreignKey: 'command_id', foreignKeyConstraints: false});
+	model.custom_commands .hasMany(	model.command_aliases, {foreignKey: 'command_id', foreignKeyConstraint: false});
 
 }

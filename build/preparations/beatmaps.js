@@ -17,14 +17,14 @@ const beatmaps_prepare = (connection) => {
         beatmap_pp: (0, beatmap_pp_1.beatmap_pp)(connection),
         beatmap_star: (0, beatmap_star_1.beatmap_star)(connection),
     };
-    model.beatmap_md5.hasOne(model.beatmap_id, { foreignKey: 'md5', foreignKeyConstraints: false });
-    model.beatmap_md5.hasOne(model.beatmap_info, { foreignKey: 'md5', foreignKeyConstraints: false });
-    model.beatmap_md5.hasOne(model.beatmap_star, { foreignKey: 'md5', foreignKeyConstraints: false });
-    model.beatmap_id.hasOne(model.beatmap_info, { foreignKey: 'md5', foreignKeyConstraints: false });
-    model.beatmap_id.hasOne(model.beatmap_star, { foreignKey: 'md5', foreignKeyConstraints: false });
-    model.beatmap_info.hasOne(model.beatmap_star, { foreignKey: 'md5', foreignKeyConstraints: false });
-    model.beatmap_md5.hasMany(model.beatmap_pp, { foreignKey: 'md5', foreignKeyConstraints: false });
-    model.beatmap_id.hasMany(model.beatmap_pp, { foreignKey: 'md5', foreignKeyConstraints: false });
-    model.beatmap_info.hasMany(model.beatmap_pp, { foreignKey: 'md5', foreignKeyConstraints: false });
+    model.beatmap_md5.hasOne(model.beatmap_id, { foreignKey: 'md5', foreignKeyConstraint: false });
+    model.beatmap_md5.hasOne(model.beatmap_info, { foreignKey: 'md5', foreignKeyConstraint: false });
+    model.beatmap_md5.hasOne(model.beatmap_star, { foreignKey: 'md5', foreignKeyConstraint: false });
+    model.beatmap_id.hasOne(model.beatmap_info, { foreignKey: 'md5', foreignKeyConstraint: false });
+    model.beatmap_id.hasOne(model.beatmap_star, { foreignKey: 'md5', foreignKeyConstraint: false });
+    model.beatmap_info.hasOne(model.beatmap_star, { foreignKey: 'md5', foreignKeyConstraint: false });
+    model.beatmap_md5.hasMany(model.beatmap_pp, { foreignKey: 'md5', foreignKeyConstraint: false });
+    model.beatmap_id.hasMany(model.beatmap_pp, { foreignKey: 'md5', foreignKeyConstraint: false });
+    model.beatmap_info.hasMany(model.beatmap_pp, { foreignKey: 'md5', foreignKeyConstraint: false });
 };
 exports.beatmaps_prepare = beatmaps_prepare;

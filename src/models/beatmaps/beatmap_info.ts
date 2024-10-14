@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "@sequelize/core";
+import { Sequelize, DataTypes } from "sequelize";
 import { define_model } from "../../defines";
 
 export const beatmap_info = (connection: Sequelize) => {
@@ -9,7 +9,7 @@ export const beatmap_info = (connection: Sequelize) => {
 		title: {type: DataTypes.STRING, allowNull: false},
 		creator: {type: DataTypes.STRING, allowNull: false},
 		difficulty: {type: DataTypes.STRING, allowNull: false},
-	}, {noPrimaryKey: false});
+	});
 
 	return model;
 	

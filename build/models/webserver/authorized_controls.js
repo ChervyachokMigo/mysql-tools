@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authorized_controls = void 0;
-const core_1 = require("@sequelize/core");
+const sequelize_1 = require("sequelize");
 const defines_1 = require("../../defines");
 const authorized_controls = (connection) => {
     const model = (0, defines_1.define_model)(connection, 'authorizedControls', {
-        ip: { type: core_1.DataTypes.STRING, allowNull: false },
-        token: { type: core_1.DataTypes.STRING, allowNull: false },
+        ip: { type: sequelize_1.DataTypes.STRING, allowNull: false },
+        token: { type: sequelize_1.DataTypes.STRING, allowNull: false },
     });
     return model;
 };

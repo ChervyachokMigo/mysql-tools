@@ -1,3 +1,3 @@
-import { Sequelize } from "@sequelize/core";
-export declare const twitchchat_sended_notify: (connection: Sequelize) => import("@sequelize/core").ModelStatic<any>;
+import { Sequelize } from "sequelize";
+export declare const twitchchat_sended_notify: (connection: Sequelize) => any;
 //# sourceMappingURL=twitchchat_sended_notify.d.ts.map

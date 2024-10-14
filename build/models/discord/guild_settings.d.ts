@@ -1,3 +1,3 @@
-import { Sequelize } from "@sequelize/core";
-export declare const guild_settings: (connection: Sequelize) => import("@sequelize/core").ModelStatic<any>;
+import { Sequelize } from "sequelize";
+export declare const guild_settings: (connection: Sequelize) => any;
 //# sourceMappingURL=guild_settings.d.ts.map

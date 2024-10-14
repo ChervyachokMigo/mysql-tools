@@ -1,9 +1,9 @@
 
-import { CreationAttributes, FindAttributeOptions, Literal, Order, UpdateValues, UpsertOptions, WhereOptions } from "@sequelize/core";
+import { CreationAttributes, FindAttributeOptions, Order, WhereOptions } from "sequelize";
 import { select_mysql_model } from "./defines";
 
 
-export const MYSQL_GET_ONE = async (action: string | null = null, condition: WhereOptions = {} ) => {
+export const MYSQL_GET_ONE = async (action: string | null = null, condition = {} ) => {
 	const MysqlModel = select_mysql_model(action);
 
 	try {
@@ -21,14 +21,14 @@ export type GET_ALL_PARAMS = {
 	action: string | null;
 	params?: WhereOptions;
 	attributes?: FindAttributeOptions;
-	limit?: null | number | Literal;
+	limit?: number;
 	order?: Order
 }
 
 export const MYSQL_GET_ALL = async ( PARAMS: GET_ALL_PARAMS ) => {
 
 	//Set default values
-	const {action = null, params = {}, attributes = undefined, limit = null, order = undefined} = PARAMS;
+	const {action = null, params = {}, attributes = undefined, limit = undefined, order = undefined} = PARAMS;
 
 	const MysqlModel = select_mysql_model(action);
 
@@ -44,7 +44,7 @@ export const MYSQL_GET_ALL = async ( PARAMS: GET_ALL_PARAMS ) => {
 	}    
 }
 
-export const MYSQL_UPDATE = async ( action: string | null = null, condition: WhereOptions = {}, values: UpdateValues<any> = {} ) => {
+export const MYSQL_UPDATE = async ( action: string | null = null, condition: WhereOptions = {}, values: any = {} ) => {
 
 	const MysqlModel = select_mysql_model(action);
 

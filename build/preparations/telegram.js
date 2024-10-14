@@ -19,7 +19,7 @@ const telegram_prepare = (telegram_connection, beatmap_connection) => {
         tg_file: (0, tg_file_1.tg_file)(beatmap_connection),
         beatmap_id: (0, beatmap_id_1.beatmap_id)(beatmap_connection)
     };
-    model.tg_file.hasMany(model.beatmap_id, { foreignKey: 'beatmapset_id', foreignKeyConstraints: false });
+    model.tg_file.hasMany(model.beatmap_id, { foreignKey: 'beatmapset_id', foreignKeyConstraint: false });
     /*const sended_map_db = connection.define ('sended_map', {
         beatmapset_id: { type: DataTypes.INTEGER },
     });

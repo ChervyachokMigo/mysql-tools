@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.select_mysql_model = exports.get_attributes_types = exports.find_model = exports.get_models_names = exports.define_model = exports.add_model_names = exports.get_connection = exports.prepareEND = exports.prepareDB = void 0;
 const promise_1 = require("mysql2/promise");
-const core_1 = require("@sequelize/core");
+const sequelize_1 = require("sequelize");
 const DEFAULT_HOST = 'localhost';
 const DEFAULT_PORT = 3306;
 const sequelize_connections = [];
@@ -63,10 +63,9 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
     try {
         if (DATABASES && typeof DATABASES === 'object' && Object.values(DATABASES).length > 0) {
             for (let DB_NAME of Object.values(DATABASES)) {
-                //DB_NAME, DB_USER, DB_PASSWORD,
-                const url = `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}/${DB_NAME}`;
-                const sequelize_connection = new core_1.Sequelize({
-                    url,
+                const sequelize_connection = new sequelize_1.Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+                    host: DB_HOST || DEFAULT_HOST,
+                    port: DB_PORT || DEFAULT_PORT,
                     dialect: 'mysql',
                     define: {
                         updatedAt: false,
@@ -80,7 +79,7 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
                         acquire: 60000,
                         idle: 60000
                     },
-                    noTypeValidation: true,
+                    typeValidation: false,
                 });
                 sequelize_connections.push({ connection: sequelize_connection, name: DB_NAME });
             }

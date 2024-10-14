@@ -1,3 +1,3 @@
-import { Sequelize } from "@sequelize/core";
-export declare const nibbers: (connection: Sequelize) => import("@sequelize/core").ModelStatic<any>;
+import { Sequelize } from "sequelize";
+export declare const nibbers: (connection: Sequelize) => any;
 //# sourceMappingURL=nibbers.d.ts.map

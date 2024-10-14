@@ -1,5 +1,5 @@
 import { createConnection } from 'mysql2/promise';
-import { Sequelize, ModelStatic, ModelAttributes, ModelOptions } from '@sequelize/core';
+import { Sequelize, ModelStatic, ModelAttributes, ModelOptions } from 'sequelize';
 
 export type action_model_attribute = {
 	name: string, 
@@ -84,7 +84,7 @@ const check_connect = async (MYSQL_CREDENTIALS: MYSQL_CREDENTIALS) => {
 	}
 }
 
-export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging: any = false ) => {
+export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging = false ) => {
 
 	const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
 
@@ -98,10 +98,10 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging: 
 
 		if (DATABASES && typeof DATABASES === 'object' && Object.values(DATABASES).length > 0){
 			for (let DB_NAME of Object.values(DATABASES)){
-				//DB_NAME, DB_USER, DB_PASSWORD,
-				const url = `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}/${DB_NAME}`;
-				const sequelize_connection = new Sequelize({
-					url,
+				
+				const sequelize_connection = new Sequelize( DB_NAME, DB_USER, DB_PASSWORD, { 
+					host: DB_HOST || DEFAULT_HOST,  
+					port: DB_PORT || DEFAULT_PORT,
 					dialect: 'mysql',
 					define: {
 						updatedAt: false,
@@ -115,7 +115,7 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging: 
 						acquire: 60000,
 						idle: 60000
 					},
-					noTypeValidation: true, 
+					typeValidation: false, 
 				});
 
 				sequelize_connections.push({ connection: sequelize_connection, name: DB_NAME });
@@ -135,7 +135,7 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging: 
 	}
 }
 
-export const prepareEND = async (logging: any = false, alter = false) => {
+export const prepareEND = async (logging = false, alter = false) => {
 	for (let sequelize_connection of sequelize_connections) {
 		await sequelize_connection.connection.sync({ logging, alter });
 	}
@@ -178,7 +178,7 @@ export const define_model = (connection: Sequelize, names: string | string[], fi
 		return founded_model.model;
 	}
 
-	const model = connection.define(model_name, fields, options);
+	const model = connection.define(model_name, fields as ModelAttributes<any>, options);
 
 	add_model_names({ names: names_lowcase, model, database: connection.getDatabaseName() });
 
@@ -208,7 +208,7 @@ export const find_model = (name: string) => {
 
 export const get_attributes_types = (name: string) => ((find_model(name) as mysql_action).attributes as action_model_attribute[]).map( x => x.attribute.type);
 
-export const select_mysql_model = (action: string | null): ModelStatic => {
+export const select_mysql_model = (action: string | null) => {
 
 	if (!action) {
 		console.error('[База данных]', '(select_mysql_model)', `empty action: ${action}`);

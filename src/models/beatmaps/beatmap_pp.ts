@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "@sequelize/core";
+import { Sequelize, DataTypes } from "sequelize";
 import { define_model } from "../../defines";
 
 export const beatmap_pp = (connection: Sequelize) => {
@@ -18,7 +18,7 @@ export const beatmap_pp = (connection: Sequelize) => {
 		speed_notes: {type: DataTypes.INTEGER, allowNull: false},
 		AR: {type: DataTypes.FLOAT, allowNull: false},
 		OD: {type: DataTypes.FLOAT, allowNull: false},
-	}, {noPrimaryKey: false});
+	});
 
 	return model;
 	

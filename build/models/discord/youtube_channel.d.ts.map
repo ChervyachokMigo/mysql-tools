@@ -1,1 +1,1 @@
-{"version":3,"file":"youtube_channel.d.ts","sourceRoot":"","sources":["../../../src/models/discord/youtube_channel.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,eAAe,eAAgB,SAAS,+CAepD,CAAA"}
+{"version":3,"file":"youtube_channel.d.ts","sourceRoot":"","sources":["../../../src/models/discord/youtube_channel.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,WAAW,CAAC;AAGjD,eAAO,MAAM,eAAe,eAAgB,SAAS,QAepD,CAAA"}

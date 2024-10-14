@@ -1,1 +1,1 @@
-{"version":3,"file":"command_aliases.d.ts","sourceRoot":"","sources":["../../../src/models/twitchchat/command_aliases.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,eAAe,eAAgB,SAAS,+CASpD,CAAA"}
+{"version":3,"file":"command_aliases.d.ts","sourceRoot":"","sources":["../../../src/models/twitchchat/command_aliases.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,WAAW,CAAC;AAGjD,eAAO,MAAM,eAAe,eAAgB,SAAS,QASpD,CAAA"}

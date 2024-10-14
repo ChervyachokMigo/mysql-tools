@@ -1,1 +1,1 @@
-{"version":3,"file":"token.d.ts","sourceRoot":"","sources":["../../../src/models/discord/token.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,KAAK,eAAgB,SAAS,+CAY1C,CAAA"}
+{"version":3,"file":"token.d.ts","sourceRoot":"","sources":["../../../src/models/discord/token.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,WAAW,CAAC;AAGjD,eAAO,MAAM,KAAK,eAAgB,SAAS,QAY1C,CAAA"}

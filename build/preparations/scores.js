@@ -15,9 +15,9 @@ const scores_prepare = (score_connection, beatmap_connection) => {
         user_grade: (0, user_grade_1.user_grade)(score_connection),
         beatmap_md5: (0, beatmaps_md5_1.beatmap_md5)(beatmap_connection)
     };
-    model.user_grade.hasMany(model.score_legacy, { foreignKey: 'userid', foreignKeyConstraints: false });
-    model.user_grade.hasMany(model.score, { foreignKey: 'userid', foreignKeyConstraints: false });
-    model.beatmap_md5.hasMany(model.score_legacy, { foreignKey: 'md5', foreignKeyConstraints: false });
-    model.beatmap_md5.hasMany(model.score, { foreignKey: 'md5', foreignKeyConstraints: false });
+    model.user_grade.hasMany(model.score_legacy, { foreignKey: 'userid', foreignKeyConstraint: false });
+    model.user_grade.hasMany(model.score, { foreignKey: 'userid', foreignKeyConstraint: false });
+    model.beatmap_md5.hasMany(model.score_legacy, { foreignKey: 'md5', foreignKeyConstraint: false });
+    model.beatmap_md5.hasMany(model.score, { foreignKey: 'md5', foreignKeyConstraint: false });
 };
 exports.scores_prepare = scores_prepare;

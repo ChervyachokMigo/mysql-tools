@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "@sequelize/core";
+import { Sequelize, DataTypes } from "sequelize";
 import { define_model } from "../../defines";
 
 export const mail_ignores = (connection: Sequelize) => {

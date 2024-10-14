@@ -1,3 +1,3 @@
-import { Sequelize } from "@sequelize/core";
-export declare const youtube_video: (connection: Sequelize) => import("@sequelize/core").ModelStatic<any>;
+import { Sequelize } from "sequelize";
+export declare const youtube_video: (connection: Sequelize) => any;
 //# sourceMappingURL=youtube_video.d.ts.map

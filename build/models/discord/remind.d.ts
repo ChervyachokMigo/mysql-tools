@@ -1,3 +1,3 @@
-import { Sequelize } from "@sequelize/core";
-export declare const remind: (connection: Sequelize) => import("@sequelize/core").ModelStatic<any>;
+import { Sequelize } from "sequelize";
+export declare const remind: (connection: Sequelize) => any;
 //# sourceMappingURL=remind.d.ts.map

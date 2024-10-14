@@ -1,3 +1,3 @@
-import { Sequelize } from "@sequelize/core";
-export declare const sended_map: (connection: Sequelize) => import("@sequelize/core").ModelStatic<any>;
+import { Sequelize } from "sequelize";
+export declare const sended_map: (connection: Sequelize) => any;
 //# sourceMappingURL=sended_map.d.ts.map

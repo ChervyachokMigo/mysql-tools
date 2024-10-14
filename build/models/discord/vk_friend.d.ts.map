@@ -1,1 +1,1 @@
-{"version":3,"file":"vk_friend.d.ts","sourceRoot":"","sources":["../../../src/models/discord/vk_friend.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,SAAS,eAAgB,SAAS,+CAS9C,CAAA"}
+{"version":3,"file":"vk_friend.d.ts","sourceRoot":"","sources":["../../../src/models/discord/vk_friend.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,WAAW,CAAC;AAGjD,eAAO,MAAM,SAAS,eAAgB,SAAS,QAS9C,CAAA"}

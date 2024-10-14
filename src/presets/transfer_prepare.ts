@@ -6,7 +6,7 @@ import { discord_prepare } from "../preparations/discord";
 import { scores_prepare } from "../preparations/scores";
 import { twitchchat_prepare } from "../preparations/twitchchat";
 import { webserver_prepare } from "../preparations/webserver";
-import Sequelize from "@sequelize/core";
+import Sequelize from "sequelize";
 
 export const transfer_prepare = async ({ DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES }: MYSQL_CREDENTIALS) => {
 

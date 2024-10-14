@@ -28,7 +28,7 @@ const MYSQL_GET_ONE = (...args_1) => __awaiter(void 0, [...args_1], void 0, func
 exports.MYSQL_GET_ONE = MYSQL_GET_ONE;
 const MYSQL_GET_ALL = (PARAMS) => __awaiter(void 0, void 0, void 0, function* () {
     //Set default values
-    const { action = null, params = {}, attributes = undefined, limit = null, order = undefined } = PARAMS;
+    const { action = null, params = {}, attributes = undefined, limit = undefined, order = undefined } = PARAMS;
     const MysqlModel = (0, defines_1.select_mysql_model)(action);
     try {
         return yield MysqlModel.findAll({ where: params, logging: false, raw: true, attributes, limit, order });

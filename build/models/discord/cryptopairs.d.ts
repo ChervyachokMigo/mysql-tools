@@ -1,3 +1,3 @@
-import { Sequelize } from "@sequelize/core";
-export declare const cryptopairs: (connection: Sequelize) => import("@sequelize/core").ModelStatic<any>;
+import { Sequelize } from "sequelize";
+export declare const cryptopairs: (connection: Sequelize) => any;
 //# sourceMappingURL=cryptopairs.d.ts.map

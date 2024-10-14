@@ -28,6 +28,6 @@ const twitchchat_prepare = (twitchchat_connection, discord_connection) => {
         user_stats: (0, user_stats_1.user_stats)(twitchchat_connection),
         token: (0, token_1.token)(discord_connection)
     };
-    model.custom_commands.hasMany(model.command_aliases, { foreignKey: 'command_id', foreignKeyConstraints: false });
+    model.custom_commands.hasMany(model.command_aliases, { foreignKey: 'command_id', foreignKeyConstraint: false });
 };
 exports.twitchchat_prepare = twitchchat_prepare;

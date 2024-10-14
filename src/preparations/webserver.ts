@@ -1,4 +1,4 @@
-import { Sequelize } from "@sequelize/core";
+import { Sequelize } from "sequelize";
 
 import { authorized_controls } from "../models/webserver/authorized_controls";
 import { authorized_mail_users } from "../models/webserver/authorized_mail_users";

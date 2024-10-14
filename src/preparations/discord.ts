@@ -1,4 +1,4 @@
-import { Sequelize } from "@sequelize/core";
+import { Sequelize } from "sequelize";
 
 import { channel } from "../models/discord/channel";
 import { cryptopairs } from "../models/discord/cryptopairs";
