@@ -134,7 +134,7 @@ const define_model = (connection, names, fields, options) => {
         return founded_model.model;
     }
     const model = connection.define(model_name, fields, options);
-    (0, exports.add_model_names)({ names: names_lowcase, model, database: connection.getDatabaseName() });
+    (0, exports.add_model_names)({ names: names_lowcase, model, database: model_name });
     return model;
 };
 exports.define_model = define_model;
