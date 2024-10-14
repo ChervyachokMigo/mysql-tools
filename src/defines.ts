@@ -179,7 +179,7 @@ export const define_model = (connection: Sequelize, names: string | string[], fi
 	}
 
 	const model = connection.define(model_name, fields as ModelAttributes, options);
-
+	console.log(connection);
 	add_model_names({ names: names_lowcase, model, database: connection.getDatabaseName() });
 
 	return model;
