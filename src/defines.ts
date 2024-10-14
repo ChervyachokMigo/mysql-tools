@@ -101,8 +101,7 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging: 
 		if (DATABASES && typeof DATABASES === 'object' && Object.values(DATABASES).length > 0){
 			for (let DB_NAME of Object.values(DATABASES)){
 				
-				const sequelize_connection = new Sequelize({ 
-					url,
+				const sequelize_connection = new Sequelize(url, { 
 					dialect: 'mysql',
 					define: {
 						updatedAt: false,
