@@ -22,15 +22,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.export_table_csv = exports.save_csv = void 0;
 const base_1 = require("../base");
@@ -39,12 +30,11 @@ const node_fs_1 = require("node:fs");
 const path = __importStar(require("node:path"));
 const tools_1 = require("../misc/tools");
 const save_csv = (csv_params, values = [], print_frequerency = 0) => {
-    var _a;
     const default_string_quotes = csv_params.tablename === 'beatmap_info' ? '``' : '"';
     const { folder_path = '', tablename, string_quotes = default_string_quotes, separator = ';' } = csv_params;
     (0, tools_1.folder_prepare)(folder_path);
     if (values && Array.isArray(values) && values.length > 0) {
-        const database_name = (_a = (0, defines_1.find_model)(Array.isArray(tablename) ? tablename[0] : tablename)) === null || _a === void 0 ? void 0 : _a.database;
+        const database_name = (0, defines_1.find_model)(Array.isArray(tablename) ? tablename[0] : tablename)?.database;
         const now = new Date();
         const filename = `${database_name}-${tablename}-${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}-` +
             `${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
@@ -82,7 +72,7 @@ const save_csv = (csv_params, values = [], print_frequerency = 0) => {
     }
 };
 exports.save_csv = save_csv;
-const export_table_csv = (csv_params) => __awaiter(void 0, void 0, void 0, function* () {
+const export_table_csv = async (csv_params) => {
     const { tablename = null } = csv_params;
     const action = Array.isArray(tablename) ? tablename[0] : tablename;
     if (!action || !(0, defines_1.find_model)(action)) {
@@ -92,12 +82,12 @@ const export_table_csv = (csv_params) => __awaiter(void 0, void 0, void 0, funct
         };
     }
     console.log('geting data from', action);
-    const values = yield (0, base_1.MYSQL_GET_ALL)({ action });
+    const values = await (0, base_1.MYSQL_GET_ALL)({ action });
     //console.log('recived', values.length, 'rows');
     (0, exports.save_csv)(csv_params, values);
     return {
         success: values.length,
         action
     };
-});
+};
 exports.export_table_csv = export_table_csv;

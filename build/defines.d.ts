@@ -1,4 +1,4 @@
-import { Sequelize, ModelAttributes, ModelOptions, ModelStatic } from "@sequelize/core";
+import Sequelize, { ModelAttributes, ModelOptions, ModelStatic } from "@sequelize/core";
 export type action_model_attribute = {
     name: string;
     attribute: any;

@@ -1,5 +1,5 @@
 import { createConnection } from 'mysql2/promise';
-import { Sequelize, ModelAttributes, ModelOptions, Model, ModelStatic } from "@sequelize/core";
+import Sequelize, { ModelAttributes, ModelOptions, ModelStatic } from "@sequelize/core";
 
 export type action_model_attribute = {
 	name: string, 
@@ -101,7 +101,7 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging: 
 		if (DATABASES && typeof DATABASES === 'object' && Object.values(DATABASES).length > 0){
 			for (let DB_NAME of Object.values(DATABASES)){
 				
-				const sequelize_connection = new Sequelize(url, { 
+				const sequelize_connection = new Sequelize({ url,
 					dialect: 'mysql',
 					define: {
 						updatedAt: false,

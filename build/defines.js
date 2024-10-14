@@ -1,17 +1,11 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.select_mysql_model = exports.get_attributes_types = exports.find_model = exports.get_models_names = exports.define_model = exports.add_model_names = exports.get_connection = exports.prepareEND = exports.prepareDB = void 0;
 const promise_1 = require("mysql2/promise");
-const core_1 = require("@sequelize/core");
+const core_1 = __importDefault(require("@sequelize/core"));
 const DEFAULT_HOST = 'localhost';
 const DEFAULT_PORT = 3306;
 const sequelize_connections = [];
@@ -22,23 +16,23 @@ const mysql_actions = [];
 * @param {Boolean} primary If true get only primary keys, else get only non-primary keys
 * @return {Array} Array of fields of Model
 */
-const get_model_field_list = (model, model_list) => __awaiter(void 0, void 0, void 0, function* () {
+const get_model_field_list = async (model, model_list) => {
     const { all = false, primary = false } = model_list;
-    return yield Promise.all(Object.entries(yield model.describe())
+    return await Promise.all(Object.entries(await model.describe())
         // eslint-disable-next-line no-unused-vars
         .filter(([key, value]) => all ? true : primary ? value.primaryKey : !value.primaryKey)
         // eslint-disable-next-line no-unused-vars
         .map(([key, value]) => key));
-});
-const check_connect = (MYSQL_CREDENTIALS) => __awaiter(void 0, void 0, void 0, function* () {
+};
+const check_connect = async (MYSQL_CREDENTIALS) => {
     console.log('[База данных]', 'Проверка соединения');
     const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
     try {
-        const connection = yield (0, promise_1.createConnection)(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}`);
+        const connection = await (0, promise_1.createConnection)(`mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}`);
         for (let DB_NAME of Object.values(DATABASES)) {
-            yield connection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;`);
+            await connection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;`);
         }
-        yield connection.end();
+        await connection.end();
         return true;
     }
     catch (e) {
@@ -53,18 +47,18 @@ const check_connect = (MYSQL_CREDENTIALS) => __awaiter(void 0, void 0, void 0, f
         }
         return false;
     }
-});
-const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_CREDENTIALS_1, ...args_1], void 0, function* (MYSQL_CREDENTIALS, logging = false) {
+};
+const prepareDB = async (MYSQL_CREDENTIALS, logging = false) => {
     const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
     console.log('[База данных]', 'Подготовка баз данных');
-    if (!(yield check_connect(MYSQL_CREDENTIALS))) {
+    if (!(await check_connect(MYSQL_CREDENTIALS))) {
         throw new Error('Нет доступа к базе');
     }
     try {
         const url = `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}`;
         if (DATABASES && typeof DATABASES === 'object' && Object.values(DATABASES).length > 0) {
             for (let DB_NAME of Object.values(DATABASES)) {
-                const sequelize_connection = new core_1.Sequelize(url, {
+                const sequelize_connection = new core_1.default({ url,
                     dialect: 'mysql',
                     define: {
                         updatedAt: false,
@@ -96,20 +90,20 @@ const prepareDB = (MYSQL_CREDENTIALS_1, ...args_1) => __awaiter(void 0, [MYSQL_C
             throw new Error(`ошибка базы: ${e}`);
         }
     }
-});
+};
 exports.prepareDB = prepareDB;
-const prepareEND = (...args_1) => __awaiter(void 0, [...args_1], void 0, function* (logging = false, alter = false) {
+const prepareEND = async (logging = false, alter = false) => {
     for (let sequelize_connection of sequelize_connections) {
-        yield sequelize_connection.connection.sync({ logging, alter });
+        await sequelize_connection.connection.sync({ logging, alter });
     }
-    yield Promise.all(mysql_actions.map((_a, i_1, a_1) => __awaiter(void 0, [_a, i_1, a_1], void 0, function* ({ names, model }, i, a) {
-        a[i].attributes = Object.entries(yield a[i].model.describe()).map(([name, attribute]) => ({ name, attribute }));
-        a[i].fileds = yield get_model_field_list(model, { all: true });
-        a[i].keys = yield get_model_field_list(model, { primary: true });
+    await Promise.all(mysql_actions.map(async ({ names, model }, i, a) => {
+        a[i].attributes = Object.entries(await a[i].model.describe()).map(([name, attribute]) => ({ name, attribute }));
+        a[i].fileds = await get_model_field_list(model, { all: true });
+        a[i].keys = await get_model_field_list(model, { primary: true });
         a[i].non_keys = a[i].fileds.filter(v => !a[i].keys.includes(v));
-    })));
+    }));
     console.log('[База данных]', 'Подготовка завершена');
-});
+};
 exports.prepareEND = prepareEND;
 const get_connection = (DB_NAME) => sequelize_connections.find(x => x.name === DB_NAME);
 exports.get_connection = get_connection;
