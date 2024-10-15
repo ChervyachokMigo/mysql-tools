@@ -134,8 +134,12 @@ const define_model = (connection, names, fields, options) => {
         return founded_model.model;
     }
     const model = connection.define(model_name, fields, options);
-    console.log(connection);
-    (0, exports.add_model_names)({ names: names_lowcase, model, database: connection.getDatabaseName() });
+    const cached_connection = sequelize_connections.find(v => v.connection === connection);
+    if (typeof cached_connection === 'undefined') {
+        console.error('[База данных]', '(define_model)', `undefined connection: ${connection}`);
+        throw new Error('undefined connection');
+    }
+    (0, exports.add_model_names)({ names: names_lowcase, model, database: cached_connection.name });
     return model;
 };
 exports.define_model = define_model;
