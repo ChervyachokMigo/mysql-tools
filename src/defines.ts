@@ -89,6 +89,8 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging: 
 
 	const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
 
+	const dialect = 'mysql';
+
 	console.log('[База данных]', 'Подготовка баз данных');
 
 	if ( !(await check_connect(MYSQL_CREDENTIALS)) ){
@@ -96,13 +98,12 @@ export const prepareDB = async ( MYSQL_CREDENTIALS: MYSQL_CREDENTIALS, logging: 
 	}
 
 	try {
-		const url = `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}`
-
 		if (DATABASES && typeof DATABASES === 'object' && Object.values(DATABASES).length > 0){
 			for (let DB_NAME of Object.values(DATABASES)){
-				
-				const sequelize_connection = new Sequelize({ url,
-					dialect: 'mysql',
+
+				const sequelize_connection = new Sequelize({ 
+					url: `${dialect}://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}/${DB_NAME}`,
+					dialect,
 					define: {
 						updatedAt: false,
 						createdAt: false,

@@ -50,16 +50,17 @@ const check_connect = async (MYSQL_CREDENTIALS) => {
 };
 const prepareDB = async (MYSQL_CREDENTIALS, logging = false) => {
     const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASES } = MYSQL_CREDENTIALS;
+    const dialect = 'mysql';
     console.log('[База данных]', 'Подготовка баз данных');
     if (!(await check_connect(MYSQL_CREDENTIALS))) {
         throw new Error('Нет доступа к базе');
     }
     try {
-        const url = `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}`;
         if (DATABASES && typeof DATABASES === 'object' && Object.values(DATABASES).length > 0) {
             for (let DB_NAME of Object.values(DATABASES)) {
-                const sequelize_connection = new core_1.default({ url,
-                    dialect: 'mysql',
+                const sequelize_connection = new core_1.default({
+                    url: `${dialect}://${DB_USER}:${DB_PASSWORD}@${DB_HOST || DEFAULT_HOST}:${DB_PORT || DEFAULT_PORT}/${DB_NAME}`,
+                    dialect,
                     define: {
                         updatedAt: false,
                         createdAt: false,
