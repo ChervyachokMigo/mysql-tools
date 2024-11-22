@@ -4,6 +4,7 @@ import { beatmap_id } from "../models/beatmaps/beatmap_id";
 import { beatmap_info } from "../models/beatmaps/beatmap_info";
 import { beatmap_pp } from "../models/beatmaps/beatmap_pp";
 import { beatmap_star } from "../models/beatmaps/beatmap_star";
+import { beatmap_pp_taiko } from "../models/beatmaps/beatmap_pp_taiko";
 
 export const beatmaps_prepare = ( connection: Sequelize | undefined ) => {
 
@@ -12,24 +13,29 @@ export const beatmaps_prepare = ( connection: Sequelize | undefined ) => {
 	}
 
 	const model = {
-		beatmap_md5: 	beatmap_md5(connection),
-		beatmap_id: 	beatmap_id(connection),
-		beatmap_info: 	beatmap_info(connection),
-        beatmap_pp: 	beatmap_pp(connection),
-        beatmap_star: 	beatmap_star(connection),
+		beatmap_md5: 		beatmap_md5(connection),
+		beatmap_id: 		beatmap_id(connection),
+		beatmap_info: 		beatmap_info(connection),
+        beatmap_pp: 		beatmap_pp(connection),
+        beatmap_star: 		beatmap_star(connection),
+		beatmap_pp_taiko: 	beatmap_pp_taiko(connection),
 	};
 
-	model.beatmap_md5	.hasOne	( model.beatmap_id, 	{ foreignKey: 'md5', foreignKeyConstraints: false});
-	model.beatmap_md5	.hasOne	( model.beatmap_info, 	{ foreignKey: 'md5', foreignKeyConstraints: false});
-	model.beatmap_md5	.hasOne	( model.beatmap_star, 	{ foreignKey: 'md5', foreignKeyConstraints: false});
+	model.beatmap_md5	.hasOne	( model.beatmap_id, 		{ foreignKey: 'md5', foreignKeyConstraints: false});
+	model.beatmap_md5	.hasOne	( model.beatmap_info, 		{ foreignKey: 'md5', foreignKeyConstraints: false});
+	model.beatmap_md5	.hasOne	( model.beatmap_star, 		{ foreignKey: 'md5', foreignKeyConstraints: false});
 
-	model.beatmap_id	.hasOne	( model.beatmap_info, 	{ foreignKey: 'md5', foreignKeyConstraints: false});
-	model.beatmap_id	.hasOne	( model.beatmap_star, 	{ foreignKey: 'md5', foreignKeyConstraints: false});
+	model.beatmap_id	.hasOne	( model.beatmap_info, 		{ foreignKey: 'md5', foreignKeyConstraints: false});
+	model.beatmap_id	.hasOne	( model.beatmap_star, 		{ foreignKey: 'md5', foreignKeyConstraints: false});
 
-	model.beatmap_info	.hasOne	( model.beatmap_star, 	{ foreignKey: 'md5', foreignKeyConstraints: false});
+	model.beatmap_info	.hasOne	( model.beatmap_star, 		{ foreignKey: 'md5', foreignKeyConstraints: false});
 
-	model.beatmap_md5	.hasMany ( model.beatmap_pp, 	{ foreignKey: 'md5', foreignKeyConstraints: false});
-	model.beatmap_id	.hasMany ( model.beatmap_pp, 	{ foreignKey: 'md5', foreignKeyConstraints: false});
-	model.beatmap_info	.hasMany ( model.beatmap_pp, 	{ foreignKey: 'md5', foreignKeyConstraints: false});
+	model.beatmap_md5	.hasMany ( model.beatmap_pp, 		{ foreignKey: 'md5', foreignKeyConstraints: false});
+	model.beatmap_id	.hasMany ( model.beatmap_pp, 		{ foreignKey: 'md5', foreignKeyConstraints: false});
+	model.beatmap_info	.hasMany ( model.beatmap_pp, 		{ foreignKey: 'md5', foreignKeyConstraints: false});
+
+	model.beatmap_md5	.hasMany ( model.beatmap_pp_taiko, 	{ foreignKey: 'md5', foreignKeyConstraints: false});
+	model.beatmap_id	.hasMany ( model.beatmap_pp_taiko, 	{ foreignKey: 'md5', foreignKeyConstraints: false});
+	model.beatmap_info	.hasMany ( model.beatmap_pp_taiko, 	{ foreignKey: 'md5', foreignKeyConstraints: false});
 
 }
