@@ -12,6 +12,8 @@ const beatmap_params = (connection) => {
         total_time: { type: core_1.DataTypes.INTEGER, allowNull: false },
         drain_time: { type: core_1.DataTypes.INTEGER, allowNull: false },
         break_time: { type: core_1.DataTypes.INTEGER, allowNull: false },
+        circles_time: { type: core_1.DataTypes.INTEGER, allowNull: false },
+        sliders_time: { type: core_1.DataTypes.INTEGER, allowNull: false },
         hit_count: { type: core_1.DataTypes.INTEGER, allowNull: false },
         slider_count: { type: core_1.DataTypes.INTEGER, allowNull: false },
         spinner_count: { type: core_1.DataTypes.INTEGER, allowNull: false },

@@ -11,6 +11,8 @@ export const beatmap_params = (connection: Sequelize) => {
 		total_time: {type: DataTypes.INTEGER, allowNull: false},
 		drain_time: {type: DataTypes.INTEGER, allowNull: false},
 		break_time: {type: DataTypes.INTEGER, allowNull: false},
+		circles_time: {type: DataTypes.INTEGER, allowNull: false},
+		sliders_time: {type: DataTypes.INTEGER, allowNull: false},
 		hit_count: {type: DataTypes.INTEGER, allowNull: false},
 		slider_count: {type: DataTypes.INTEGER, allowNull: false},
 		spinner_count: {type: DataTypes.INTEGER, allowNull: false},
