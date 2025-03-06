@@ -1,1 +1,1 @@
-{"version":3,"file":"beatmap_pp_taiko.d.ts","sourceRoot":"","sources":["../../../src/models/beatmaps/beatmap_pp_taiko.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,gBAAgB,eAAgB,SAAS,+CAoBrD,CAAA"}
+{"version":3,"file":"beatmap_pp_taiko.d.ts","sourceRoot":"","sources":["../../../src/models/beatmaps/beatmap_pp_taiko.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,gBAAgB,GAAI,YAAY,SAAS,+CAoBrD,CAAA"}

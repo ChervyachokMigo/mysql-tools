@@ -1,1 +1,1 @@
-{"version":3,"file":"beatmap_pp.d.ts","sourceRoot":"","sources":["../../../src/models/beatmaps/beatmap_pp.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,UAAU,eAAgB,SAAS,+CAqB/C,CAAA"}
+{"version":3,"file":"beatmap_pp.d.ts","sourceRoot":"","sources":["../../../src/models/beatmaps/beatmap_pp.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,UAAU,GAAI,YAAY,SAAS,+CAqB/C,CAAA"}

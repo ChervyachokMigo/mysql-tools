@@ -1,1 +1,1 @@
-{"version":3,"file":"osu_hunter_tracking.d.ts","sourceRoot":"","sources":["../../../src/models/discord/osu_hunter_tracking.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,mBAAmB,eAAgB,SAAS,+CASxD,CAAA"}
+{"version":3,"file":"osu_hunter_tracking.d.ts","sourceRoot":"","sources":["../../../src/models/discord/osu_hunter_tracking.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,mBAAmB,GAAI,YAAY,SAAS,+CASxD,CAAA"}

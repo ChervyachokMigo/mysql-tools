@@ -1,1 +1,1 @@
-{"version":3,"file":"authorized_mail_users.d.ts","sourceRoot":"","sources":["../../../src/models/webserver/authorized_mail_users.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,qBAAqB,eAAgB,SAAS,+CAS1D,CAAA"}
+{"version":3,"file":"authorized_mail_users.d.ts","sourceRoot":"","sources":["../../../src/models/webserver/authorized_mail_users.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,qBAAqB,GAAI,YAAY,SAAS,+CAS1D,CAAA"}

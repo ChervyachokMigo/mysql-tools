@@ -1,1 +1,1 @@
-{"version":3,"file":"custom_commands.d.ts","sourceRoot":"","sources":["../../../src/models/twitchchat/custom_commands.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,eAAe,eAAgB,SAAS,+CAWpD,CAAA"}
+{"version":3,"file":"custom_commands.d.ts","sourceRoot":"","sources":["../../../src/models/twitchchat/custom_commands.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,eAAe,GAAI,YAAY,SAAS,+CAWpD,CAAA"}

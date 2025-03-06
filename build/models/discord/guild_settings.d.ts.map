@@ -1,1 +1,1 @@
-{"version":3,"file":"guild_settings.d.ts","sourceRoot":"","sources":["../../../src/models/discord/guild_settings.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,cAAc,eAAgB,SAAS,+CAUnD,CAAA"}
+{"version":3,"file":"guild_settings.d.ts","sourceRoot":"","sources":["../../../src/models/discord/guild_settings.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAa,MAAM,iBAAiB,CAAC;AAGvD,eAAO,MAAM,cAAc,GAAI,YAAY,SAAS,+CAUnD,CAAA"}
